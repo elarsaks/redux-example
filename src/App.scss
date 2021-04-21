@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  border: solid 1px gray;
+  background-color: aliceblue;
+  height: 10vh;
+
+  h1{
+    margin-top: 1.5vh;
+  }
+}
+
+#content-container {
+  display: flex;
+  justify-content: space-around;
+  height: 90vh;
+}
+
+.half {
+  width: 45%;
+  background-color: aqua;
+}
+
+.center-menu {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 10%;
+  background-color: cadetblue;
+  height: 100%;
+}

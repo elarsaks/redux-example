@@ -1,10 +1,10 @@
 type WishList = {
-  name: String
+  name: string
   items: WishListItem[]
 }
 
 type WishListItem = {
-  productId: Number
-  favorite: Number
-  confirmed: Boolean
+  productId: number
+  favorite: number
+  confirmed: boolean
 }
