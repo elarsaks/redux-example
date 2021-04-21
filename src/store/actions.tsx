@@ -48,6 +48,5 @@ export const setInitialState = () => (dispatch: any) => {
     
   getProductsList()
     .then(data => dispatch(setShoppingList(data)))
-
 }
 
