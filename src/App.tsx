@@ -1,17 +1,29 @@
 import * as React from "react"
 import "./App.scss"
-import { useDispatch } from "react-redux"
+import styled from 'styled-components'
 import { Dispatch } from "redux"
+import { useDispatch, useSelector, shallowEqual } from "react-redux"
+import WishList from './components/WishList'
 
 
 import { CenterMenu } from "./components/CenterMenu"
 import { Left } from "./components/Left"
-import { Right } from "./components/Right"
 import { setInitialState } from "./store/actions"
+
+const RightHalfWrapper = styled.div`
+  width: 45%;
+  padding: 0.3em;
+  overflow-y: scroll;
+`
 
 const App: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch()
   dispatch(setInitialState())
+
+  const shoppingList: readonly WishList[] = useSelector(
+    (state: any) => state.shoppingList,
+    shallowEqual
+  )
 
   return (
     <main>
@@ -20,10 +32,18 @@ const App: React.FC = () => {
       Droppe Xmas
       </h1>
     </div>
-  <div id="content-container">
+    <div id="content-container">
       <Left />
-      <CenterMenu />
-      <Right />
+        <CenterMenu />
+        
+      <RightHalfWrapper>
+        {shoppingList.map((wishList: WishList) => (
+          <WishList
+            key={wishList.name}
+            name={wishList.name}
+            items={wishList.items}
+          />))}
+      </RightHalfWrapper>
     </div>
 </main>
   )
