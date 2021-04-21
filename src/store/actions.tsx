@@ -20,7 +20,7 @@ export const setStatus = (status: string) => ({
 export const setInitialState = () => (dispatch: any) => {
   dispatch(setStatus('loading'))
 
-  // Get Products data
+  // Get Single Product data
   const getProductsData = (i: WishListItem) =>
     api.getProductsData(i.productId)
       .then(data => {
@@ -29,22 +29,25 @@ export const setInitialState = () => (dispatch: any) => {
       return data
     })
   
-  // Get Products data for WishLists
+  // Get Products data per WishList
   const getWishListProducts = (wishList: WishList) =>
     Promise.all(wishList.items.map((i: WishListItem) =>
       getProductsData(i)
     )
   )
 
-  // Merge WishLists into ShoppingList
-  const getProductList = Promise.all(
-    wishLists.map((wishList: any) => getWishListProducts(wishList))
+  // Loop over wishlists
+  const getProductsList = () =>
+    Promise.all( wishLists.map((wishList: any) => {
+      return {
+        name: wishList.name,
+        items: getWishListProducts(wishList)
+      }
+    })
   )
-
-  console.log(getProductList)
-  
-
-  //getProductList()
-    //.then(data => dispatch(setShoppingList(data)))
+    
+  getProductsList()
+    .then(data => dispatch(setShoppingList(data)))
 
 }
+
