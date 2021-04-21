@@ -1,25 +1,27 @@
 import * as React from "react"
 import styled from 'styled-components'
 import { useSelector, shallowEqual } from "react-redux"
+import Product from './Product'
 
 const RightDiv = styled.div`
   width: 45%;
   background-color: aqua;
+  overflow-y: scroll;
 `
 
 const WishList = styled.div`
-  height: 1.2em;
-  width: 100%;
+  position: relative;
+  display: inline-block;
   background-color: gray;
+  padding: 0.5em;
+
+  .wishlist-header{
+    padding: 0.5em;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+  }
 `
-
-
-const WishListItem = styled.div`
-  height: 1.2em;
-  width: 100%;
-  background-color: #808080;
-`
-
 
 export const Right: React.FC = () => {
 
@@ -31,19 +33,18 @@ export const Right: React.FC = () => {
   return (
     <RightDiv>
       {shoppingList.map((wishList: WishList) => (
-        <WishList key={wishList.name}>
-          <h3>{wishList.name}</h3>
-
+        <WishList key={ wishList.name }>
+          <div className="wishlist-header">{ wishList.name }</div>
+          {wishList.items.map((wishListItem: any) => (
+            <Product key={wishListItem.id}
+              favorite={wishListItem.favorite}
+              id={wishListItem.id}
+              price={wishListItem.price}
+              title={wishListItem.title}
+            />
+          ))}
         </WishList>
       ))}
     </RightDiv>
   )
 }
-
-/* 
-          {wishList.items.map((wishListItem: any) => (
-            <WishListItem key={wishListItem.id}>
-              <p>{ wishListItem}</p>
-            </WishListItem>
-          ))}
-*/

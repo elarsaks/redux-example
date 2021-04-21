@@ -38,11 +38,12 @@ export const setInitialState = () => (dispatch: any) => {
 
   // Loop over wishlists
   const getProductsList = () =>
-    Promise.all( wishLists.map((wishList: any) => {
-      return {
-        name: wishList.name,
-        items: getWishListProducts(wishList)
-      }
+    Promise.all(wishLists.map((wishList: any) => {
+      return getWishListProducts(wishList)
+        .then((data) => {
+          wishList.items = data
+          return wishList
+        })
     })
   )
     
