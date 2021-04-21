@@ -1,22 +1,26 @@
-import wishLists from './initialState.json'
-
 const initialState: any = {
   error: null,
   status: 'idle',
-  wishLists: wishLists
+  shoppingList: []
 }
 
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
-    case 'set/wishLists': {
+    case 'set/erros': {
+      return {
+        ...state,
+        error: action.payload,
+      }
+    }
+    case 'set/shoppingList': {
       return {
         ...state,
         error: null,
-        wishLists: action.payload,
+        shoppingList: action.payload,
         status: 'idle'
       }
     }
-    case 'loading': {
+    case 'set/status': {
       return {
         ...state,
         status: action.payload,

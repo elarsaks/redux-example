@@ -4,27 +4,27 @@
     "items":[
       {
         "productId":1,
-        "stars":5,
+        "favorite":5,
         "confirmed":false
       },
       {
         "productId":10,
-        "stars":4,
+        "favorite":4,
         "confirmed":false
       },
       {
         "productId":14,
-        "stars":3,
+        "favorite":3,
         "confirmed":false
       },
       {
         "productId":13,
-        "stars":2,
+        "favorite":2,
         "confirmed":false
       },
       {
         "productId":18,
-        "stars":1,
+        "favorite":1,
         "confirmed":false
       }
     ]
@@ -34,22 +34,22 @@
     "items":[
       {
         "productId":3,
-        "stars":5,
+        "favorite":5,
         "confirmed":false
       },
       {
         "productId":7,
-        "stars":4,
+        "favorite":4,
         "confirmed":false
       },
       {
         "productId":6,
-        "stars":3,
+        "favorite":3,
         "confirmed":false
       },
       {
         "productId":13,
-        "stars":2,
+        "favorite":2,
         "confirmed":false
       }
     ]
@@ -59,17 +59,17 @@
     "items":[
       {
         "productId":18,
-        "stars":5,
+        "favorite":5,
         "confirmed":false
       },
       {
         "productId":16,
-        "stars":4,
+        "favorite":4,
         "confirmed":false
       },
       {
         "productId":3,
-        "stars":4,
+        "favorite":4,
         "confirmed":false
       }
     ]
@@ -79,17 +79,17 @@
     "items":[
       {
         "productId":9,
-        "stars":5,
+        "favorite":5,
         "confirmed":false
       },
       {
         "productId":8,
-        "stars":5,
+        "favorite":5,
         "confirmed":false
       },
       {
         "productId":17,
-        "stars":3,
+        "favorite":3,
         "confirmed":false
       }
     ]
@@ -99,12 +99,12 @@
     "items":[
       {
         "productId":8,
-        "stars":5,
+        "favorite":5,
         "confirmed":false
       },
       {
-        "productId":59,
-        "stars":4,
+        "productId":9,
+        "favorite":4,
         "confirmed":false
       }
     ]
