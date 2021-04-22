@@ -3,6 +3,11 @@ type WishList = {
   items: WishListItem[]
 }
 
+type ProductList = {
+  name: string
+  items: Product[]
+}
+
 type Product = {
   productId: number
   favorite: number

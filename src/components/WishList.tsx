@@ -38,9 +38,9 @@ const WishList: React.FC<WishListProps> = ({
       <div className="wishlist-header" onClick={() => setOpen(!open)}>{name}</div>
         { items.map((wishListItem: any) => (
                 <Product
-                  key={wishListItem.id}
+                  key={wishListItem.productId}
                   favorite={wishListItem.favorite}
-                  id={wishListItem.id}
+                  id={wishListItem.productId}
                   open={open}
                   price={wishListItem.price}
                   title={wishListItem.title}

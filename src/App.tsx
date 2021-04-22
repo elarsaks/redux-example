@@ -14,11 +14,13 @@ const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(setInitialState())
-  }, [])
+  }, [dispatch])
 
+  /*
   const error: any = useSelector(
     (state: any) => state.error,
   )
+  */
 
   const status: string = useSelector(
     (state: any) => state.status,

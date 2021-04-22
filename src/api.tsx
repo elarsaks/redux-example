@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const getProductsData = (productId: Number) => {
-  console.log(productId)
   return axios({
     method: 'GET',
     url: `https://fakestoreapi.com/products/${productId}`,
