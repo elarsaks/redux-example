@@ -24,10 +24,11 @@ export const setInitialState = () => (dispatch: any) => {
   const getProductsData = (i: WishListItem) =>
     api.getProductsData(i.productId)
       .then(data => {
-      data.confirmed = i.confirmed
-      data.favorite = i.favorite
-      return data
-    })
+        data.productId = data.id
+        data.confirmed = i.confirmed
+        data.favorite = i.favorite
+        return data
+      })
   
   // Get Products data per WishList
   const getWishListProducts = (wishList: WishList) =>

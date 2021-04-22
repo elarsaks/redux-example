@@ -1,50 +1,46 @@
-import * as React from "react"
+import React, { useEffect } from 'react';
 import "./App.scss"
-import styled from 'styled-components'
+import { useDispatch, useSelector } from "react-redux"
 import { Dispatch } from "redux"
-import { useDispatch, useSelector, shallowEqual } from "react-redux"
-import WishList from './components/WishList'
 
 
 import { CenterMenu } from "./components/CenterMenu"
 import { Left } from "./components/Left"
+import { Right } from "./components/Right"
 import { setInitialState } from "./store/actions"
-
-const RightHalfWrapper = styled.div`
-  width: 45%;
-  padding: 0.3em;
-  overflow-y: scroll;
-`
 
 const App: React.FC = () => {
   const dispatch: Dispatch<any> = useDispatch()
-  dispatch(setInitialState())
 
-  const shoppingList: readonly WishList[] = useSelector(
-    (state: any) => state.shoppingList,
-    shallowEqual
+  useEffect(() => {
+    dispatch(setInitialState())
+  }, [])
+
+  const error: any = useSelector(
+    (state: any) => state.error,
   )
+
+  const status: string = useSelector(
+    (state: any) => state.status,
+  )
+  
 
   return (
     <main>
     <div id="header">
       <h1>
-      Droppe Xmas
+          Droppe X-mas
       </h1>
     </div>
-    <div id="content-container">
-      <Left />
-        <CenterMenu />
-        
-      <RightHalfWrapper>
-        {shoppingList.map((wishList: WishList) => (
-          <WishList
-            key={wishList.name}
-            name={wishList.name}
-            items={wishList.items}
-          />))}
-      </RightHalfWrapper>
-    </div>
+      {status === 'loading'
+        ? <h1 id="loading-header">Loading ...</h1>
+        : <div id="content-container">
+            <Left />
+            <CenterMenu />
+            <Right />
+          </div>
+      }
+      
 </main>
   )
 }

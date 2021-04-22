@@ -6,16 +6,18 @@ import Product from './Product'
 const WishListWrapper = styled.div`
   position: relative;
   display: inline-block;
-  background-color: cadetblue;
   border-radius: 0.22em;
   margin-bottom: 0.5em;
   width: 100%;
 
   .wishlist-header{
+    background-color: teal;
+    color: white;
+    border-radius: 0.2em;
     padding: 0.5em;
     font-size: 1.2em;
-    font-weight: bold;
     cursor: pointer;
+    text-transform: uppercase;
   }
 
 `
@@ -30,8 +32,6 @@ const WishList: React.FC<WishListProps> = ({
   items
 }) => {
   const [open, setOpen] = useState<boolean>(false)
-
-
 
   return (
     <WishListWrapper >

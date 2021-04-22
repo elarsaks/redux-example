@@ -6,19 +6,33 @@ const CenterMenuWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 10%;
-  background-color: cadetblue;
+  background-color:  aliceblue;
   height: 100%;
+  border-left: 2px solid teal;
+  border-right: 2px solid teal;
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  height: 3em;
+  justify-content: center;
+  margin: 1em 2px 1em 2px;
+  cursor: pointer;
+  background-color: teal;
+  border-radius: 0.3em;
+  text-transform: uppercase;
+  color: white;
 `
 
 export const CenterMenu: React.FC = () => {
   
   return (
     <CenterMenuWrapper >
-      <button>Test 1</button>
-      <button>Test 2</button>
-      <button>Test 3</button>
-      <button>Test 4</button>
-      <button>Test 5</button>
+      <ButtonContainer>Test 1</ButtonContainer>
+      <ButtonContainer>Test 2</ButtonContainer>
+      <ButtonContainer>Test 3</ButtonContainer>
+      <ButtonContainer>Test 4</ButtonContainer>
+      <ButtonContainer>Test 5</ButtonContainer>
     </CenterMenuWrapper>
   )
 }

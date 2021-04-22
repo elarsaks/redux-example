@@ -1,13 +1,13 @@
 import * as React from "react"
 import styled from 'styled-components'
 import { useSelector, shallowEqual } from "react-redux"
+import WishList from './WishList'
 
-const LeftHalfWrapper = styled.div`
+const RightHalfWrapper = styled.div`
   width: 45%;
   padding: 0.3em;
   overflow-y: scroll;
   scrollbar-width: none;
-  -ms-overflow-style: none;
   -ms-overflow-style: none;
   ::-webkit-scrollbar { 
     width: 0;
@@ -20,17 +20,23 @@ const LeftHalfWrapper = styled.div`
     text-transform: uppercase;
   }
 `
-export const Left: React.FC = () => {
+
+export const Right: React.FC = () => {
 
   const shoppingList: readonly WishList[] = useSelector(
     (state: any) => state.shoppingList,
     shallowEqual
   )
-  
+
   return (
-    <LeftHalfWrapper >
-      <h1>Shopping List</h1>
-      
-    </LeftHalfWrapper>
+    <RightHalfWrapper>
+      <h1>Wish List</h1>
+      {shoppingList.map((wishList: WishList) => (
+        <WishList
+          key={wishList.name}
+          name={wishList.name}
+          items={wishList.items}
+        />))}
+    </RightHalfWrapper>
   )
 }

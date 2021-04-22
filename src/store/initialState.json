@@ -10,12 +10,12 @@
       {
         "productId":10,
         "favorite":4,
-        "confirmed":false
+        "confirmed":true
       },
       {
         "productId":14,
         "favorite":3,
-        "confirmed":false
+        "confirmed":true
       },
       {
         "productId":13,

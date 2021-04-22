@@ -1,16 +1,20 @@
 import * as React from "react"
 import styled from 'styled-components'
 
-const ProductDivWrapper = styled.div`
+interface ProductDivWrapperProps {
+  value: number
+}
+
+const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   .open {
     visibility: visible;
-    height: 100px; 
+    height: ${(p) => p.value > 63 ? '100px' : '75px'}; 
     transition: all .75s ease;
     position: relative;
-    background-color: #d3d3d3;
-    border: 1px solid;
-    margin-bottom: 3px;
-    border-radius: 0.1em;
+    background-color:  aliceblue;
+    border: 1px solid teal;
+    margin-top: 3px;
+    border-radius: 0.3em;
     transition: all .5s ease;
   }
 
@@ -22,7 +26,7 @@ const ProductDivWrapper = styled.div`
   }
 
   .title {
-   background-color: #8a8a8a;
+   background-color: #0e9ca5;
    padding: 0.5em;
   }
 
@@ -53,7 +57,7 @@ const Product: React.FC<ProductProps> = ({
   title,
 }) => {
   return (
-    <ProductDivWrapper >
+    <ProductDivWrapper value={title.length}>
       <div className={open ? 'open' : 'closed'}>
         <div className="title" >{title}</div>
         <div className="lower-half">

@@ -1,11 +1,13 @@
 import axios from 'axios'
 
 const getProductsData = (productId: Number) => {
+  console.log(productId)
   return axios({
     method: 'GET',
     url: `https://fakestoreapi.com/products/${productId}`,
     headers: {
-      'Access-Control-Allow-Origin': '*'
+      'Access-Control-Allow-Origin': '*',
+     // "Cache-Control": "max-age=3600"
     },
   })
     .then(resp => resp.data)
