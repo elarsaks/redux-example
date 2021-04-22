@@ -1,7 +1,9 @@
+import wishLists from './initialState.json'
+
 const initialState: any = {
   error: null,
   status: 'idle',
-  shoppingList: []
+  shoppingList: wishLists
 }
 
 export default function reducer(state = initialState, action: any) {

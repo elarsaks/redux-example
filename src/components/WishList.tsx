@@ -19,9 +19,7 @@ const WishListWrapper = styled.div`
     cursor: pointer;
     text-transform: uppercase;
   }
-
 `
-
 interface WishListProps {
   items: any[]
   name: string
@@ -39,12 +37,9 @@ const WishList: React.FC<WishListProps> = ({
         { items.map((wishListItem: any) => (
           <Product
             amount={0}
-            key={wishListItem.productId}
-            favorite={wishListItem.favorite}
             id={wishListItem.productId}
             open={open}
-            price={wishListItem.price}
-            title={wishListItem.title}
+            favorite={wishListItem.favorite}
             />
           ))
         }

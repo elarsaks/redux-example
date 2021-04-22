@@ -21,7 +21,7 @@ const LeftHalfWrapper = styled.div`
     text-transform: uppercase;
   }
 `
-export const Left: React.FC = () => {
+export const ShoppingList: React.FC = () => {
 
   const initialList: ProductList[] = useSelector(
     (state: any) => state.shoppingList,
@@ -59,7 +59,13 @@ export const Left: React.FC = () => {
     return mapProductsDataBackToIds(confirmedProductList, productsWithAmounts)
   }
 
-  const productList = shoppingList() // getItemsList(initialList)
+  const getFavoriteAverage = (productList: Product[]) => {
+    const favorites = productList.map(p => p.favorite)
+    const sum = favorites.reduce((a, c) => a + c)
+    return Math.round(sum / favorites.length)
+  }
+
+  const productList = shoppingList() 
 
   return (
     <LeftHalfWrapper >
@@ -67,13 +73,9 @@ export const Left: React.FC = () => {
       {productList.map((product: Product[], index: number) => (
         <Product
           amount={product.length}
-          key={index}
-          favorite={product[0].favorite}
           id={product[0].productId}
           open={true}
-          price={product[0].price}
-          title={product[0].title}
-        /> 
+          favorite={getFavoriteAverage(product)}/> 
       ))}
       
     </LeftHalfWrapper>
