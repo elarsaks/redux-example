@@ -18,6 +18,10 @@ const WishListWrapper = styled.div`
     font-size: 1.2em;
     cursor: pointer;
     text-transform: uppercase;
+
+    :hover{
+      background-color: #13c4d1;
+    }
   }
 `
 interface WishListProps {

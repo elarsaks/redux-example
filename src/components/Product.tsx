@@ -28,9 +28,9 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   }
 
   .title {
-   background-color: #0e9ca5;
-   padding: 0.5em;
-   border-radius: 0.3em 0.3em 0 0;
+    background-color: #139bd1;
+    padding: 0.5em;
+    border-radius: 0.3em 0.3em 0 0;
   }
 
   .lower-half{
