@@ -96,7 +96,7 @@ const Product: React.FC<ProductProps> = ({
                   ? <button>Confirm</button>
                   : <Amount>
                       <text>Amount: <b>{amount}</b> </text>
-                      <text>Discount: <b>{amount === 1 ? 0 : amount === 2 ? 20 : 30 }%</b> </text>
+                      <text>Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b> </text>
                     </Amount>
                 }
             </div>

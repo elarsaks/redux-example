@@ -63,9 +63,9 @@
         "confirmed":false
       },
       {
-        "productId":16,
+        "productId":9,
         "favorite":4,
-        "confirmed":false
+        "confirmed":true
       },
       {
         "productId":3,
