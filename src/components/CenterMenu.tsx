@@ -8,8 +8,8 @@ const CenterMenuWrapper = styled.div`
   width: 10%;
   background-color:  aliceblue;
   height: 100%;
-  border-left: 2px solid teal;
-  border-right: 2px solid teal;
+  border-left: 1px solid teal;
+  border-right: 1px solid teal;
 `
 
 const ButtonContainer = styled.div`

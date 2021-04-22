@@ -42,6 +42,7 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
 `
 
 interface ProductProps {
+  amount: number
   favorite: number
   id: number
   open: boolean
@@ -50,6 +51,7 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({
+  amount,
   favorite,
   id,
   open,
@@ -66,7 +68,7 @@ const Product: React.FC<ProductProps> = ({
             {[...Array(favorite)].map((e, i) => <span className="favorite" key={i}> ★</span>)} 
           </div>
           <div >
-            <button>Confirm</button>
+            <button>{amount}</button>
           </div>
         </div>
       </div>

@@ -66,6 +66,7 @@ export const Left: React.FC = () => {
       <h1>Shopping List</h1>
       {productList.map((product: Product[], index: number) => (
         <Product
+          amount={product.length}
           key={index}
           favorite={product[0].favorite}
           id={product[0].productId}
