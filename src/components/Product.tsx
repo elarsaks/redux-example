@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
+import { useSelector } from "react-redux"
 interface ProductDivWrapperProps {
   confirmed: boolean
   value: number
@@ -40,6 +41,11 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   .favorite{
     color: #ff9100
   }
+
+  button {
+    font-size: 1.1em;
+    cursor: pointer;
+  }
 `
 
 interface ProductProps {
@@ -50,6 +56,7 @@ interface ProductProps {
   price: number
   productId: number
   title: string
+  sendItemToShoppingList: any
 }
 
 const Product: React.FC<ProductProps> = ({
@@ -60,7 +67,12 @@ const Product: React.FC<ProductProps> = ({
   price,
   productId,
   title,
+  sendItemToShoppingList
 }) => {
+
+  const customSelection: boolean = useSelector(
+    (state: any) => state.customSelection
+  )
 
   return (
     <ProductDivWrapper
@@ -70,14 +82,19 @@ const Product: React.FC<ProductProps> = ({
       <div className={open ? 'open' : 'closed'}>
           <div className="title" >{title}</div>
           <div className="lower-half">
-              <div >Price: {price}€</div>
+            <div >Price: {price}€</div>
               
             <div > Favorite: 
               {[...Array(favorite)].map((e, i) => <span className="favorite" key={i}> ★</span>)} 
             </div>
                 
             {amount === 0
-              ? <button>Confirm</button>
+              ? <button
+                  onClick={sendItemToShoppingList}
+                  disabled={!customSelection}
+                >
+                  {confirmed ? 'Disconfirm' : 'Confirm'}
+                </button>
               : <div>
                   Amount: <b>{amount} </b>
                   Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b>

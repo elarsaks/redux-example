@@ -79,7 +79,8 @@ export const ShoppingList: React.FC = () => {
           open={true}
           price={product[0].price}
           title={product[0].title}
-          favorite={getFavoriteAverage(product)}/> 
+          favorite={getFavoriteAverage(product)}
+          sendItemToShoppingList={null}/>
       ))}
       
     </LeftHalfWrapper>

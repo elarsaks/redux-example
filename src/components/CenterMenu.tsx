@@ -3,8 +3,9 @@ import React, { useState } from 'react'
 import { useDispatch } from "react-redux"
 import {
   emptyShoppingList,
-  setTheCheapest,
-  setMostFavorite
+  setCheapest,
+  setFavorite,
+  setCustomSelection
 } from '../store/actions'
 
 
@@ -17,6 +18,10 @@ const CenterMenuWrapper = styled.div`
   height: 100%;
   border-left: 1px solid teal;
   border-right: 1px solid teal;
+
+  h1 {
+    text-align: center;
+  }
 `
 
 interface ButtonContainerProps {
@@ -64,7 +69,7 @@ const Button: React.FC<ButtonProps> = ({
 
 export const CenterMenu: React.FC = () => {
   const dispatch: any = useDispatch()
-  const [activeButton, setActiveButton] = useState('test')
+  const [activeButton, setActiveButton] = useState('custom')
   
   return (
     <CenterMenuWrapper >
@@ -73,7 +78,7 @@ export const CenterMenu: React.FC = () => {
         text={'Hand pick products'}
         callBack={() => {
           setActiveButton('custom')
-          console.log('CREATE CUSTOM SELECTION')
+          dispatch(setCustomSelection(true))
         }} />
       
       <Button
@@ -81,7 +86,7 @@ export const CenterMenu: React.FC = () => {
         text={'Get cheapest option'}
         callBack={() => {
           setActiveButton('cheapest')
-          dispatch(setTheCheapest)
+          dispatch(setCheapest())
         }} />
       
       <Button
@@ -89,25 +94,25 @@ export const CenterMenu: React.FC = () => {
         text={'Get favorite option'}
         callBack={() => {
           setActiveButton('favorite')
-          dispatch(setMostFavorite)
+          dispatch(setFavorite())
         }} />
       
-      <br></br>
-      
-      <Button
-        active={activeButton === 'empty'}
-        text={'Empty Shopping List'}
-        callBack={() => {
-          setActiveButton('empty')
-          dispatch(emptyShoppingList)
-        }} />
-      
+      <h1>Total: 9999€</h1>
+
       <Button
         active={activeButton === 'confirm'}
         text={'Confirm Shopping List'}
         callBack={() => {
           setActiveButton('confirm')
           console.log('CREATE CONFIRMATION!')
+        }} />
+      
+      <Button
+        active={activeButton === 'empty'}
+        text={'Empty Shopping List'}
+        callBack={() => {
+          setActiveButton('empty')
+          dispatch(emptyShoppingList())
         }} />
     </CenterMenuWrapper>
   )

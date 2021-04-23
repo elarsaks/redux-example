@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import "./App.scss"
 import styled from 'styled-components'
-import { useSelector, useDispatch, shallowEqual } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { CenterMenu } from "./components/CenterMenu"
 import { ShoppingList } from "./components/ShoppingList"
 import WishList from './components/WishList'
@@ -29,9 +29,8 @@ const RightHalfWrapper = styled.div`
 const App: React.FC = () => {
   const dispatch: any = useDispatch()
 
-  const shoppingList: WishList[] = useSelector(
-    (state: any) => state.shoppingList,
-    shallowEqual
+  const shoppingList: ProductList[] = useSelector(
+    (state: any) => state.shoppingList
   )
 
   const status: string = useSelector(
@@ -57,8 +56,8 @@ const App: React.FC = () => {
           <CenterMenu />
           
         <RightHalfWrapper>
-          <h1>Wish List</h1>
-          {shoppingList.map((wishList: WishList) => (
+          <h1> Wish List</h1>
+          {shoppingList.map((wishList: ProductList) => (
             <WishList
               key={wishList.name}
               name={wishList.name}
