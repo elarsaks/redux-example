@@ -38,13 +38,12 @@ export const setInitialState = () => (dispatch: any) => {
   dispatch(setStatus('loading'))
   
    // Get Single Product data
-   const getProductsData = (i: WishListItem) =>
-      api.getProductsData(i.productId)
+   const getProductsData = (item: any) =>
+      api.getProductsData(item.productId)
        .then(data => {
-          data.productId = data.id
-          data.confirmed = i.confirmed
-          data.favorite = i.favorite
-          return data
+         item.price = data.price
+         item.title = data.title
+          return item
         })
     
     // Get Products data per WishList
