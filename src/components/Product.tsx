@@ -2,11 +2,14 @@ import React from 'react';
 import styled from 'styled-components'
 import { useSelector } from "react-redux"
 interface ProductDivWrapperProps {
+  amount: number
   confirmed: boolean
+  customSelection: boolean
   value: number
 }
 
 const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
+  cursor: ${(p) => (p.customSelection && p.amount === 0) ? 'pointer' : 'auto'};
   .open {
     visibility: visible;
     height: ${(p) => p.value > 63 ? '100px' : '75px'}; 
@@ -27,7 +30,7 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   }
 
   .title {
-    background-color: ${(p) => p.confirmed ? '#51c8f7' : '#139bd1'}; 
+    background-color: ${(p) => p.confirmed ? '#51c8f7' : '#068dc2'}; 
     padding: 0.5em;
     border-radius: 0.3em 0.3em 0 0;
   }
@@ -42,9 +45,12 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
     color: #ff9100
   }
 
-  button {
+  .confirmation-text {
     font-size: 1.1em;
-    cursor: pointer;
+    font-weight: 600;
+    width: 33%;
+    text-align: center;
+    color:${(p) => p.confirmed ? 'teal' : '#a32424'}; 
   }
 `
 
@@ -54,7 +60,6 @@ interface ProductProps {
   favorite: number
   open: boolean
   price: number
-  productId: number
   title: string
   sendItemToShoppingList: any
 }
@@ -65,7 +70,6 @@ const Product: React.FC<ProductProps> = ({
   favorite,
   open,
   price,
-  productId,
   title,
   sendItemToShoppingList
 }) => {
@@ -76,11 +80,16 @@ const Product: React.FC<ProductProps> = ({
 
   return (
     <ProductDivWrapper
+      amount={amount}
       value={title.length}
       confirmed={confirmed}
+      customSelection={customSelection}
+      onClick={customSelection ? sendItemToShoppingList : null}
     >
       <div className={open ? 'open' : 'closed'}>
-          <div className="title" >{title}</div>
+        <div className="title" >
+          {title}
+        </div>
           <div className="lower-half">
             <div >Price: {price}€</div>
               
@@ -89,12 +98,9 @@ const Product: React.FC<ProductProps> = ({
             </div>
                 
             {amount === 0
-              ? <button
-                  onClick={sendItemToShoppingList}
-                  disabled={!customSelection}
-                >
-                  {confirmed ? 'Disconfirm' : 'Confirm'}
-                </button>
+              ? <div className={'confirmation-text'}>
+                  {!confirmed ? 'Not Confirmed' : 'Confirmed'}
+                </div>
               : <div>
                   Amount: <b>{amount} </b>
                   Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b>

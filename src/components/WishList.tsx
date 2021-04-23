@@ -51,7 +51,6 @@ const WishList: React.FC<WishListProps> = ({
             confirmed={wishListItem.confirmed}
             key={wishListItem.productId}
             favorite={wishListItem.favorite}
-            productId={wishListItem.productId}
             open={open}
             price={wishListItem.price}
             title={wishListItem.title}
