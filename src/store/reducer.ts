@@ -1,7 +1,8 @@
 import wishLists from './initialState.json'
 
 const initialState: any = {
-  shoppingList: wishLists
+  shoppingList: wishLists,
+  status: 'loading',
 }
 
 export default function reducer(state = initialState, action: any) {
@@ -10,6 +11,7 @@ export default function reducer(state = initialState, action: any) {
       return {
         ...state,
         shoppingList: action.payload,
+        status: 'idle'
       }
     }
     case 'set/empty': {

@@ -74,8 +74,11 @@ export const ShoppingList: React.FC = () => {
         <Product
           key={i}
           amount={product.length}
-          id={product[0].productId}
+          confirmed={product[0].confirmed}
+          productId={product[0].productId}
           open={true}
+          price={product[0].price}
+          title={product[0].title}
           favorite={getFavoriteAverage(product)}/> 
       ))}
       

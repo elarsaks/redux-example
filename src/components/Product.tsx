@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components'
-import api from '../api'
-
-
 interface ProductDivWrapperProps {
+  confirmed: boolean
   value: number
 }
 
@@ -28,7 +26,7 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   }
 
   .title {
-    background-color: #139bd1;
+    background-color: ${(p) => p.confirmed ? '#51c8f7' : '#139bd1'}; 
     padding: 0.5em;
     border-radius: 0.3em 0.3em 0 0;
   }
@@ -46,59 +44,47 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
 
 interface ProductProps {
   amount: number
-  id: number
+  confirmed: boolean
   favorite: number
   open: boolean
+  price: number
+  productId: number
+  title: string
 }
 
 const Product: React.FC<ProductProps> = ({
   amount,
+  confirmed,
   favorite,
-  id,
-  open
+  open,
+  price,
+  productId,
+  title,
 }) => {
-  const [loading, setLoading] = useState<boolean>(false)
-  const [product, setProduct] = useState<any>({
-    productId: 0,
-    favorite: 0,
-    confirmed: false,
-    title: '',
-    price: 0,
-  })
-
-  useEffect(() => {
-    setLoading(true)
-    api.getProductsData(id)
-      .then(data => {
-        setProduct(data)
-        setLoading(false)
-      })
-  },[id])
 
   return (
-    <ProductDivWrapper value={product.title.length}>
-      {loading && open
-        ? <p>Loading ...</p>
-        : <div className={open ? 'open' : 'closed'}>
-            <div className="title" >{product.title}</div>
-            <div className="lower-half">
-                <div >Price: {product.price}€</div>
+    <ProductDivWrapper
+      value={title.length}
+      confirmed={confirmed}
+    >
+      <div className={open ? 'open' : 'closed'}>
+          <div className="title" >{title}</div>
+          <div className="lower-half">
+              <div >Price: {price}€</div>
+              
+            <div > Favorite: 
+              {[...Array(favorite)].map((e, i) => <span className="favorite" key={i}> ★</span>)} 
+            </div>
                 
-              <div > Favorite: 
-                {[...Array(favorite)].map((e, i) => <span className="favorite" key={i}> ★</span>)} 
-              </div>
-                
-                {amount === 0
-                  ? <button>Confirm</button>
-                  : <div>
-                      Amount: <b>{amount} </b>
-                      Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b>
-                    </div>
-                }
+            {amount === 0
+              ? <button>Confirm</button>
+              : <div>
+                  Amount: <b>{amount} </b>
+                  Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b>
+                </div>
+            }
             </div>
         </div>
-      }
-      
     </ProductDivWrapper>
   )
 }
