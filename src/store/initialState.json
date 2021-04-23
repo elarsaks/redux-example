@@ -30,6 +30,21 @@
     ]
   },
   {
+    "name":"Emilia",
+    "items":[
+      {
+        "productId":8,
+        "favorite":5,
+        "confirmed":false
+      },
+      {
+        "productId":9,
+        "favorite":4,
+        "confirmed":true
+      }
+    ]
+  },
+  {
     "name":"Johannes",
     "items":[
       {
@@ -91,21 +106,6 @@
         "productId":17,
         "favorite":3,
         "confirmed":false
-      }
-    ]
-  },
-  {
-    "name":"Emilia",
-    "items":[
-      {
-        "productId":8,
-        "favorite":5,
-        "confirmed":false
-      },
-      {
-        "productId":9,
-        "favorite":4,
-        "confirmed":true
       }
     ]
   }

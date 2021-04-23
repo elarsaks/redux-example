@@ -44,10 +44,6 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   }
 `
 
-const Amount = styled.div`
- // background-color: blue;
-`
-
 interface ProductProps {
   amount: number
   id: number
@@ -94,10 +90,10 @@ const Product: React.FC<ProductProps> = ({
                 
                 {amount === 0
                   ? <button>Confirm</button>
-                  : <Amount>
-                      <text>Amount: <b>{amount}</b> </text>
-                      <text>Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b> </text>
-                    </Amount>
+                  : <div>
+                      Amount: <b>{amount} </b>
+                      Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b>
+                    </div>
                 }
             </div>
         </div>

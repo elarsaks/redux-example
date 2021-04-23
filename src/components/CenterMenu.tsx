@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 import * as React from "react"
+import { useDispatch } from "react-redux"
+import {
+  emptyShoppingList,
+  setCheapest,
+  setMostFavorite
+} from '../store/actions'
+
 
 const CenterMenuWrapper = styled.div`
   display: flex;
@@ -33,14 +40,31 @@ const ButtonContainer = styled.div`
 `
 
 export const CenterMenu: React.FC = () => {
+  const dispatch: any = useDispatch()
   
   return (
     <CenterMenuWrapper >
-      <ButtonContainer> Cheapest Option </ButtonContainer>
-      <ButtonContainer> Most Favorite Option </ButtonContainer>
-      <ButtonContainer> Hand Pick Products </ButtonContainer>
-      <ButtonContainer> Confirm Purchase </ButtonContainer>
-      <ButtonContainer> Empty Card </ButtonContainer>
+      <ButtonContainer>
+        Hand Pick Products
+      </ButtonContainer>
+
+      <ButtonContainer onClick={() => dispatch(setCheapest)}>
+        Cheapest Option
+      </ButtonContainer>
+
+      <ButtonContainer onClick={() => dispatch(setMostFavorite)}>
+        Most Favorite Option
+      </ButtonContainer>
+
+      <br /> 
+
+      <ButtonContainer>
+        Confirm Purchase
+      </ButtonContainer>
+
+      <ButtonContainer onClick={() => dispatch(emptyShoppingList)}>
+        Empty Shopping List
+      </ButtonContainer>
     </CenterMenuWrapper>
   )
 }

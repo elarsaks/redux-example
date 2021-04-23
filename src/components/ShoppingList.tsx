@@ -70,8 +70,9 @@ export const ShoppingList: React.FC = () => {
   return (
     <LeftHalfWrapper >
       <h1>Shopping List</h1>
-      {productList.map((product: Product[], index: number) => (
+      {productList.map((product: Product[], i: number) => (
         <Product
+          key={i}
           amount={product.length}
           id={product[0].productId}
           open={true}

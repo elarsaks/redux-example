@@ -27,7 +27,7 @@ const RightHalfWrapper = styled.div`
 
 const App: React.FC = () => {
 
-  const shoppingList: readonly WishList[] = useSelector(
+  const shoppingList: WishList[] = useSelector(
     (state: any) => state.shoppingList,
     shallowEqual
   )
@@ -40,9 +40,10 @@ const App: React.FC = () => {
     </div>
       
     <div id="content-container">
-          <ShoppingList />
-          <CenterMenu />
-    
+      <ShoppingList />
+      
+        <CenterMenu />
+        
       <RightHalfWrapper>
         <h1>Wish List</h1>
         {shoppingList.map((wishList: WishList) => (
