@@ -59,7 +59,6 @@ export default function reducer(state = initialState, action: any) {
           return item
         })
       
-      console.log(loopOverLists(state.shoppingList, setUnConfirmed))
       return {
         ...state,
         customSelection: false,
