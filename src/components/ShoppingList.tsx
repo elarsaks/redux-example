@@ -5,22 +5,12 @@ import Product from "./Product"
 import { setTotal } from "../store/actions"
 
 const LeftHalfWrapper = styled.div`
-  width: 45%;
-  padding: 0.3em;
-  overflow-y: scroll;
   scrollbar-width: none;
-  -ms-overflow-style: none;
   -ms-overflow-style: none;
   ::-webkit-scrollbar { 
     width: 0;
     height: 0;
   } 
-  
-  h1{
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-  }
 `
 export const ShoppingList: React.FC = () => {
 
@@ -92,7 +82,7 @@ export const ShoppingList: React.FC = () => {
   }, [dispatch, productList, total])
 
   return (
-    <LeftHalfWrapper >
+    <LeftHalfWrapper className="half">
       <h1>Shopping List</h1>
       {productList.map((product: Product[], i: number) => (
         <Product

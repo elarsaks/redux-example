@@ -7,33 +7,6 @@ import { ShoppingList } from "./components/ShoppingList"
 import WishList from './components/WishList'
 import { setInitialState } from "./store/actions"
 
-
-const RightHalfWrapper = styled.div`
-  width: 45%;
-  padding: 0.3em;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  ::-webkit-scrollbar { 
-    width: 0;
-    height: 0;
-  } 
-  
-  h1{
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-  }
-`
-
-const LoadingDiv = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  margin-top: 30vh;
-	text-align: center;
-`
-
 const rotate360 = keyframes`
   from {
     transform: rotate(0deg);
@@ -43,18 +16,26 @@ const rotate360 = keyframes`
   }
 `;
 
-const Spinner = styled.div`
-  animation: ${rotate360} 1s linear infinite;
-  transform: translateZ(0);
-  border-top: 3px solid #51c8f7;
-  border-right: 3px solid #51c8f7;
-  border-bottom: 3px solid #51c8f7;
-  border-left: 5px solid teal;
-  background: transparent;
-  width: 10em;
-  height: 10em;
-  border-radius: 50%;
-`;
+const LoadingDiv = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  margin-top: 30vh;
+	text-align: center;
+
+  .spinner {
+    animation: ${rotate360} 1s linear infinite;
+    transform: translateZ(0);
+    border-top: 3px solid #51c8f7;
+    border-right: 3px solid #51c8f7;
+    border-bottom: 3px solid #51c8f7;
+    border-left: 5px solid teal;
+    background: transparent;
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+  }
+`
 
 const ErrorDiv = styled.div`
   display: flex;
@@ -91,42 +72,31 @@ const App: React.FC = () => {
     dispatch(setInitialState())
   }, [dispatch])
 
-  const hasSelectedItem = (items: Product[]) =>
-    items.filter(item => item.confirmed === true)
-
   return (
     <main>
       <div id="header">
-        <h1>
-          Droppe X-mas
-      </h1>
+        <h1> Droppe X-mas </h1>
       </div>
 
       {status === 'loading' && error === null
+        /* Loading */
         ? <LoadingDiv>
-          <Spinner />
+          <div className="spinner" />
         </LoadingDiv>
+
+        /* Error */
         : error != null
           ? <ErrorDiv>
             <h1 style={{ "color": '#a32424' }}>
               Oops something went wrong, please contact system administrator!
               </h1>
           </ErrorDiv>
+
+          /* Content */
           : <div id="content-container">
             <ShoppingList />
-
             <CenterMenu customSelection={customSelection} total={total} />
-
-            <RightHalfWrapper>
-              <h1> Wish List</h1>
-              {shoppingList.map((wishList: ProductList) => (
-                <WishList
-                  activeHeader={hasSelectedItem(wishList.items).length > 0}
-                  key={wishList.name}
-                  name={wishList.name}
-                  items={wishList.items}
-                />))}
-            </RightHalfWrapper>
+            <WishList activeHeader={true} shoppingList={shoppingList} />
           </div>
       }
     </main>

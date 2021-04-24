@@ -33,14 +33,12 @@ const WishListWrapper = styled.div<WishListWrapperProps>`
 
 interface WishListProps {
   activeHeader: boolean
-  items: Product[]
-  name: string
+  shoppingList: ProductList[]
 }
 
 const WishList: React.FC<WishListProps> = ({
   activeHeader,
-  name,
-  items
+  shoppingList
 }) => {
   const dispatch: any = useDispatch()
   const [open, setOpen] = useState<boolean>(false)
@@ -49,32 +47,42 @@ const WishList: React.FC<WishListProps> = ({
     dispatch(setSingleProduct({ listName, productId }))
   }
 
+  const hasSelectedItem = (items: Product[]) =>
+    items.filter(item => item.confirmed === true)
+
   useEffect(() => {
     setOpen(activeHeader)
   }, [activeHeader])
 
   return (
-    <WishListWrapper activeHeader={activeHeader} >
-      <div
-        className="wishlist-header"
-        onClick={() => setOpen(!open)}
-      >
-        {name}
-      </div>
-      { items.map((wishListItem: any) => (
-        <Product
-          amount={0}
-          confirmed={wishListItem.confirmed}
-          key={wishListItem.productId}
-          favorite={wishListItem.favorite}
-          open={open}
-          price={wishListItem.price}
-          title={wishListItem.title}
-          sendItemToShoppingList={() => sendItemToShoppingList(name, wishListItem.productId)}
-        />
-      ))
-      }
-    </WishListWrapper>
+    <div className="half">
+      <h1> Wish List</h1>
+
+      {shoppingList.map((wishList: ProductList) => (
+        <WishListWrapper activeHeader={hasSelectedItem(wishList.items).length > 0} >
+          <div
+            className="wishlist-header"
+            onClick={() => setOpen(!open)}
+          >
+            {wishList.name}
+          </div>
+
+          { wishList.items.map((wishListItem: any) => (
+            <Product
+              amount={0}
+              confirmed={wishListItem.confirmed}
+              key={wishListItem.productId}
+              favorite={wishListItem.favorite}
+              open={open}
+              price={wishListItem.price}
+              title={wishListItem.title}
+              sendItemToShoppingList={() =>
+                sendItemToShoppingList(wishList.name, wishListItem.productId)}
+            />
+          ))}
+        </WishListWrapper>
+      ))}
+    </div>
   )
 }
 
