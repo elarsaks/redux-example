@@ -31,15 +31,17 @@ export default function reducer(state = initialState, action: any) {
       
     case 'set/cheapest': {
       const cheapest = (items: Product[]) =>
-        items.reduce((prev, curr) => prev.price < curr.favorite ? prev : curr)
+        items.reduce((prev, curr) => prev.price < curr.price ? prev : curr)
       
-      const setCheapest = (items: Product[]) =>
-        items.map(item => {
+      const setCheapest = (items: Product[]) => {
+        console.log(items)
+        return items.map(item => {
           item.productId === cheapest(items).productId
             ? item.confirmed = true
             : item.confirmed = false
           return item
-        })
+        })}
+      
       return {
         ...state,
         customSelection: false,
