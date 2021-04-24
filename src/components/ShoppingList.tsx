@@ -74,8 +74,7 @@ export const ShoppingList: React.FC = () => {
       }
     }
     const priceList = productList.map((list: Product[]) => getDiscount(list[0].price, list.length))
-
-    return priceList.reduce((acc:number, curr: number)=> acc + curr)
+    return priceList.length === 0 ? 0 : priceList.reduce((acc:number, curr: number)=> acc + curr)
   }
 
   // Get average amount of stars incase there same product from different child

@@ -1,10 +1,7 @@
-import Product from '../components/Product'
-import wishLists from './initialState.json'
-
 const initialState: any = {
   customSelection: true,
   error: null,
-  shoppingList: wishLists,
+  shoppingList: [],
   status: 'loading',
   total: 0
 }
@@ -33,14 +30,13 @@ export default function reducer(state = initialState, action: any) {
       const cheapest = (items: Product[]) =>
         items.reduce((prev, curr) => prev.price < curr.price ? prev : curr)
       
-      const setCheapest = (items: Product[]) => {
-        console.log(items)
-        return items.map(item => {
+      const setCheapest = (items: Product[]) => 
+         items.map(item => {
           item.productId === cheapest(items).productId
             ? item.confirmed = true
             : item.confirmed = false
           return item
-        })}
+        })
       
       return {
         ...state,
@@ -63,6 +59,7 @@ export default function reducer(state = initialState, action: any) {
           return item
         })
       
+      console.log(loopOverLists(state.shoppingList, setUnConfirmed))
       return {
         ...state,
         customSelection: false,
