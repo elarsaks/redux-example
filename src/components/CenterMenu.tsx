@@ -62,19 +62,19 @@ const Button: React.FC<ButtonProps> = ({
   return <ButtonContainer
     active={active}
     onClick={() => callBack()}
-    >
-      {text}
-    </ButtonContainer>;
+  >
+    {text}
+  </ButtonContainer>;
 }
 
 interface CenterMenuProps {
   total: number
 }
 
-export const CenterMenu: React.FC<CenterMenuProps> = ({total}) => {
+export const CenterMenu: React.FC<CenterMenuProps> = ({ total }) => {
   const dispatch: any = useDispatch()
   const [activeButton, setActiveButton] = useState('custom')
-  
+
   return (
     <CenterMenuWrapper >
       <Button
@@ -84,7 +84,7 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({total}) => {
           setActiveButton('custom')
           dispatch(setCustomSelection(true))
         }} />
-      
+
       <Button
         active={activeButton === 'cheapest'}
         text={'cheapest option'}
@@ -92,7 +92,7 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({total}) => {
           setActiveButton('cheapest')
           dispatch(setCheapest())
         }} />
-      
+
       <Button
         active={activeButton === 'favorite'}
         text={'favorite option'}
@@ -100,8 +100,8 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({total}) => {
           setActiveButton('favorite')
           dispatch(setFavorite())
         }} />
-      
-      <h2>Total: { total }€</h2>
+
+      <h2>Total: {total}€</h2>
 
       <Button
         active={activeButton === 'confirm'}
@@ -110,7 +110,7 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({total}) => {
           setActiveButton('confirm')
           console.log('CREATE CONFIRMATION!')
         }} />
-      
+
       <Button
         active={activeButton === 'empty'}
         text={'Empty List'}

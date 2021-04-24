@@ -46,7 +46,7 @@ const WishList: React.FC<WishListProps> = ({
   const [open, setOpen] = useState<boolean>(false)
 
   const sendItemToShoppingList = (listName: string, productId: number) => {
-    dispatch(setSingleProduct({listName, productId}))
+    dispatch(setSingleProduct({ listName, productId }))
   }
 
   useEffect(() => {
@@ -60,20 +60,20 @@ const WishList: React.FC<WishListProps> = ({
         onClick={() => setOpen(!open)}
       >
         {name}
-        </div>
-        { items.map((wishListItem: any) => (
-          <Product
-            amount={0}
-            confirmed={wishListItem.confirmed}
-            key={wishListItem.productId}
-            favorite={wishListItem.favorite}
-            open={open}
-            price={wishListItem.price}
-            title={wishListItem.title}
-            sendItemToShoppingList={() => sendItemToShoppingList(name, wishListItem.productId)}
-            />
-          ))
-        }
+      </div>
+      { items.map((wishListItem: any) => (
+        <Product
+          amount={0}
+          confirmed={wishListItem.confirmed}
+          key={wishListItem.productId}
+          favorite={wishListItem.favorite}
+          open={open}
+          price={wishListItem.price}
+          title={wishListItem.title}
+          sendItemToShoppingList={() => sendItemToShoppingList(name, wishListItem.productId)}
+        />
+      ))
+      }
     </WishListWrapper>
   )
 }

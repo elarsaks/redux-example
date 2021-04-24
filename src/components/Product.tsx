@@ -53,6 +53,14 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
     color:${(p) => p.confirmed ? 'teal' : '#a32424'}; 
   }
 `
+interface LowerHalfSectionProps {
+  flexGrow: number
+}
+
+const LowerHalfSection = styled.div<LowerHalfSectionProps>`
+  display: flex;
+  flex-grow: ${(p) => p.flexGrow};
+`
 
 interface ProductProps {
   amount: number
@@ -90,24 +98,27 @@ const Product: React.FC<ProductProps> = ({
         <div className="title" >
           {title}
         </div>
-          <div className="lower-half">
-            <div >Price: {price}€</div>
-              
-            <div > Favorite: 
-              {[...Array(favorite)].map((e, i) => <span className="favorite" key={i}> ★</span>)} 
-            </div>
-                
-            {amount === 0
-              ? <div className={'confirmation-text'}>
-                  {!confirmed ? 'Not Confirmed' : 'Confirmed'}
-                </div>
-              : <div>
-                  Amount: <b>{amount} </b>
-                  Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10 }%</b>
-                </div>
-            }
-            </div>
+        <div className="lower-half">
+          <LowerHalfSection flexGrow={1} >
+            Favorite: {[...Array(favorite)].map((e, i) =>
+            <span className="favorite" key={i}> ★</span>)}
+          </LowerHalfSection>
+
+          <LowerHalfSection flexGrow={1}>
+            Price: {price}€
+          </LowerHalfSection>
+
+          {amount === 0
+            ? <LowerHalfSection flexGrow={1} className="confirmation-text">
+              {!confirmed ? 'Not Confirmed' : 'Confirmed'}
+            </LowerHalfSection>
+            : <LowerHalfSection flexGrow={1}>
+              Amount: <b>{amount} </b>
+                  Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10}%</b>
+            </LowerHalfSection>
+          }
         </div>
+      </div>
     </ProductDivWrapper>
   )
 }

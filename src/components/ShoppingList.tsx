@@ -28,15 +28,15 @@ export const ShoppingList: React.FC = () => {
     (state: any) => state.shoppingList
   )
 
-  const  getAllProducts = (wishLists: ProductList[]) => {
+  const getAllProducts = (wishLists: ProductList[]) => {
     let productList: Product[] = []
     wishLists.forEach((i: ProductList) => productList.push(...i.items))
     return productList
   }
 
-  const  countSameProducts = (productList: Product[], productId: number) => 
+  const countSameProducts = (productList: Product[], productId: number) =>
     productList.filter((p) => p.productId === productId).length;
-  
+
   const mapProductsDataBackToIds = (confirmedProducts: Product[], productsWithAmounts: any) => {
     return productsWithAmounts.map((p: any) =>
       confirmedProducts.filter((cp: Product) => cp.productId === p.productId))
@@ -47,14 +47,14 @@ export const ShoppingList: React.FC = () => {
     const productList = getAllProducts(initialList)
     const confirmedProducts = productList.filter(product => product.confirmed)
     const uniqueProducts = confirmedProducts.map(item => item.productId)
-      .filter((value:number, index: number, self: number[]) => self.indexOf(value) === index)
-    
+      .filter((value: number, index: number, self: number[]) => self.indexOf(value) === index)
+
     // Count repeating products
     const productsWithAmounts = uniqueProducts.map(p => {
       return {
         productId: p,
         amount: countSameProducts(confirmedProducts, p)
-        }
+      }
     })
 
     return mapProductsDataBackToIds(confirmedProducts, productsWithAmounts)
@@ -66,15 +66,15 @@ export const ShoppingList: React.FC = () => {
     const getDiscount = (price: number, amount: number) => {
 
       if (amount > 1 && amount < 9) {
-        return price * amount - (price * amount/10)
+        return price * amount - (price * amount / 10)
       } else if (amount > 9) {
-        return price * amount - (price * 9/10)
+        return price * amount - (price * 9 / 10)
       } else {
-       return  price * amount
+        return price * amount
       }
     }
     const priceList = productList.map((list: Product[]) => getDiscount(list[0].price, list.length))
-    return priceList.length === 0 ? 0 : priceList.reduce((acc:number, curr: number)=> acc + curr)
+    return priceList.length === 0 ? 0 : priceList.reduce((acc: number, curr: number) => acc + curr)
   }
 
   // Get average amount of stars incase there same product from different child
@@ -104,9 +104,9 @@ export const ShoppingList: React.FC = () => {
           price={product[0].price}
           title={product[0].title}
           favorite={getFavoriteAverage(product)}
-          sendItemToShoppingList={null}/>
+          sendItemToShoppingList={null} />
       ))}
-      
+
     </LeftHalfWrapper>
   )
 }

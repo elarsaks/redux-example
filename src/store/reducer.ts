@@ -98,8 +98,7 @@ export default function reducer(state = initialState, action: any) {
             confirmProduct(list.items)
           }
           return list
-        })
-      
+        })  
 
       const confirmProduct = (items: Product[]) => 
         items.map(item => {
