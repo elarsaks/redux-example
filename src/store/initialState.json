@@ -10,12 +10,12 @@
       {
         "productId":10,
         "favorite":4,
-        "confirmed":true
+        "confirmed": false
       },
       {
         "productId":14,
         "favorite":3,
-        "confirmed":true
+        "confirmed":false
       },
       {
         "productId":13,
@@ -55,7 +55,7 @@
       {
         "productId":7,
         "favorite":4,
-        "confirmed":true
+        "confirmed":false
       },
       {
         "productId":6,
@@ -65,7 +65,7 @@
       {
         "productId":13,
         "favorite":2,
-        "confirmed":true
+        "confirmed":false
       }
     ]
   },
@@ -95,7 +95,7 @@
       {
         "productId":9,
         "favorite":5,
-        "confirmed":true
+        "confirmed":false
       },
       {
         "productId":8,

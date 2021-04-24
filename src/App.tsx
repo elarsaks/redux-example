@@ -45,6 +45,9 @@ const App: React.FC = () => {
     dispatch(setInitialState())
   }, [dispatch])
 
+  const hasSelectedItem = (items: Product[]) => 
+    items.filter(item => item.confirmed === true)
+
   return (
     <main>
     <div id="header">
@@ -63,6 +66,7 @@ const App: React.FC = () => {
           <h1> Wish List</h1>
           {shoppingList.map((wishList: ProductList) => (
             <WishList
+              activeHeader={hasSelectedItem(wishList.items).length > 0}
               key={wishList.name}
               name={wishList.name}
               items={wishList.items}

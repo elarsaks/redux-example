@@ -42,12 +42,12 @@ export const ShoppingList: React.FC = () => {
       confirmedProducts.filter((cp: Product) => cp.productId === p.productId))
   }
 
+  // Create shoppingList with repeating products merged into single item
   const shoppingList = () => {
     const productList = getAllProducts(initialList)
     const confirmedProducts = productList.filter(product => product.confirmed)
     const uniqueProducts = confirmedProducts.map(item => item.productId)
       .filter((value:number, index: number, self: number[]) => self.indexOf(value) === index)
-    
     
     // Count repeating products
     const productsWithAmounts = uniqueProducts.map(p => {
@@ -91,7 +91,6 @@ export const ShoppingList: React.FC = () => {
   useEffect(() => {
     dispatch(setTotal(total))
   }, [dispatch, productList, total])
-
 
   return (
     <LeftHalfWrapper >
