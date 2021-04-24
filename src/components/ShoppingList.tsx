@@ -64,7 +64,6 @@ export const ShoppingList: React.FC = () => {
   const totalPrice = () => {
     const productList = shoppingList()
     const getDiscount = (price: number, amount: number) => {
-
       if (amount > 1 && amount < 9) {
         return price * amount - (price * amount / 10)
       } else if (amount > 9) {

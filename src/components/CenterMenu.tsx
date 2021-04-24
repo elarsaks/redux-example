@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux"
 import {
   emptyShoppingList,
@@ -68,12 +68,22 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 interface CenterMenuProps {
+  customSelection: boolean
   total: number
 }
 
-export const CenterMenu: React.FC<CenterMenuProps> = ({ total }) => {
+export const CenterMenu: React.FC<CenterMenuProps> = ({
+  customSelection,
+  total
+}) => {
   const dispatch: any = useDispatch()
   const [activeButton, setActiveButton] = useState('custom')
+
+  useEffect(() => {
+    if (customSelection) {
+      setActiveButton('custom')
+    }
+  }, [customSelection])
 
   return (
     <CenterMenuWrapper >

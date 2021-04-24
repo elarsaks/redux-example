@@ -59,7 +59,9 @@ interface LowerHalfSectionProps {
 
 const LowerHalfSection = styled.div<LowerHalfSectionProps>`
   display: flex;
+  flex: 1;
   flex-grow: ${(p) => p.flexGrow};
+  white-space: pre-wrap;
 `
 
 interface ProductProps {
@@ -86,13 +88,23 @@ const Product: React.FC<ProductProps> = ({
     (state: any) => state.customSelection
   )
 
+  const getDiscount = (price: number, amount: number) => {
+    if (amount > 1 && amount < 9) {
+      return price * amount - (price * amount / 10)
+    } else if (amount > 9) {
+      return price * amount - (price * 9 / 10)
+    } else {
+      return price * amount
+    }
+  }
+
   return (
     <ProductDivWrapper
       amount={amount}
       value={title.length}
       confirmed={confirmed}
-      customSelection={customSelection}
-      onClick={customSelection ? sendItemToShoppingList : null}
+      customSelection={true}
+      onClick={sendItemToShoppingList}
     >
       <div className={open ? 'open' : 'closed'}>
         <div className="title" >
@@ -104,18 +116,27 @@ const Product: React.FC<ProductProps> = ({
             <span className="favorite" key={i}> ★</span>)}
           </LowerHalfSection>
 
-          <LowerHalfSection flexGrow={1}>
-            Price: {price}€
-          </LowerHalfSection>
-
           {amount === 0
-            ? <LowerHalfSection flexGrow={1} className="confirmation-text">
-              {!confirmed ? 'Not Confirmed' : 'Confirmed'}
+            /* WISH LIST*/
+            ? <LowerHalfSection flexGrow={2} >
+              <LowerHalfSection flexGrow={1}>
+                Price: <b>{price}€</b>
+              </LowerHalfSection>
+
+              <LowerHalfSection flexGrow={1} className="confirmation-text">
+                {!confirmed ? 'Not Confirmed' : 'Confirmed'}
+              </LowerHalfSection>
             </LowerHalfSection>
-            : <LowerHalfSection flexGrow={1}>
-              Amount: <b>{amount} </b>
-                  Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10}%</b>
-            </LowerHalfSection>
+
+            /* SHOPPING LIST*/
+            : <div > { }
+              <LowerHalfSection flexGrow={2}>
+                Price: <b>{price}€ </b>
+                Amount: <b>{amount} </b>
+                Discount: <b>{amount === 1 ? 0 : amount > 9 ? 0 : amount * 10}% </b>
+                Total: <b>{getDiscount(price, amount).toFixed(2)}€</b>
+              </LowerHalfSection>
+            </div>
           }
         </div>
       </div>

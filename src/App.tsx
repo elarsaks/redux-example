@@ -71,6 +71,10 @@ const App: React.FC = () => {
     (state: any) => state.shoppingList
   )
 
+  const customSelection: boolean = useSelector(
+    (state: any) => state.customSelection
+  )
+
   const error: string = useSelector(
     (state: any) => state.error
   )
@@ -111,7 +115,7 @@ const App: React.FC = () => {
           : <div id="content-container">
             <ShoppingList />
 
-            <CenterMenu total={total} />
+            <CenterMenu customSelection={customSelection} total={total} />
 
             <RightHalfWrapper>
               <h1> Wish List</h1>
