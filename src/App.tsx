@@ -6,6 +6,8 @@ import { CenterMenu } from "./components/CenterMenu"
 import { ShoppingList } from "./components/ShoppingList"
 import WishList from './components/WishList'
 import { setInitialState } from "./store/actions"
+import Loading from './components/Loading'
+import Error from './components/Error'
 
 
 const RightHalfWrapper = styled.div`
@@ -33,6 +35,10 @@ const App: React.FC = () => {
     (state: any) => state.shoppingList
   )
 
+  const error: string = useSelector(
+    (state: any) => state.error
+  )
+
   const status: string = useSelector(
     (state: any) => state.status
   )
@@ -47,7 +53,7 @@ const App: React.FC = () => {
 
   const hasSelectedItem = (items: Product[]) => 
     items.filter(item => item.confirmed === true)
-
+  
   return (
     <main>
     <div id="header">
@@ -55,23 +61,26 @@ const App: React.FC = () => {
           Droppe X-mas
       </h1>
     </div>
-      {status === 'loading'
-        ? <h1>Loading ...</h1>
-        : <div id="content-container">
-        <ShoppingList />
-        
-          <CenterMenu total={total}/>
-          
-        <RightHalfWrapper>
-          <h1> Wish List</h1>
-          {shoppingList.map((wishList: ProductList) => (
-            <WishList
-              activeHeader={hasSelectedItem(wishList.items).length > 0}
-              key={wishList.name}
-              name={wishList.name}
-              items={wishList.items}
-            />))}
-        </RightHalfWrapper>
+    
+      {status === 'loading' && error === null
+        ? <Loading />
+        : error != null
+          ? <Error />
+          : <div id="content-container">
+              <ShoppingList />
+              
+                <CenterMenu total={total}/>
+                
+              <RightHalfWrapper>
+                <h1> Wish List</h1>
+                {shoppingList.map((wishList: ProductList) => (
+                  <WishList
+                    activeHeader={hasSelectedItem(wishList.items).length > 0}
+                    key={wishList.name}
+                    name={wishList.name}
+                    items={wishList.items}
+                  />))}
+              </RightHalfWrapper>
       </div>
       }
 </main>

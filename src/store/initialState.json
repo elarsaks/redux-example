@@ -40,7 +40,7 @@
       {
         "productId":9,
         "favorite":4,
-        "confirmed":true
+        "confirmed":false
       }
     ]
   },
@@ -95,7 +95,7 @@
       {
         "productId":9,
         "favorite":5,
-        "confirmed":false
+        "confirmed":true
       },
       {
         "productId":8,

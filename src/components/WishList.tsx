@@ -50,7 +50,7 @@ const WishList: React.FC<WishListProps> = ({
   }
 
   useEffect(() => {
-    setOpen(true)
+    setOpen(activeHeader)
   }, [activeHeader])
 
   return (

@@ -66,6 +66,13 @@ export default function reducer(state = initialState, action: any) {
       }
     }
       
+    case 'set/error': {
+      return {
+        ...state,
+        error: action.payload
+      }
+    }
+      
     case 'set/favorite': {
       const favorite = (items: WishListItem[]) =>
         items.reduce((prev, curr) => prev.favorite > curr.favorite ? prev : curr)

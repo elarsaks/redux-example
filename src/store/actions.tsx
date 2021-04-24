@@ -6,6 +6,12 @@ export const setShoppingList = (shoppingList: WishList[]) => ({
   payload: shoppingList
 })
 
+
+export const setError = (error: WishList[]) => ({
+  type: 'set/error',
+  payload: error
+})
+
 export const setCustomSelection = (customSelection: boolean) => ({
   type: 'set/customSelection',
   payload: customSelection
@@ -49,7 +55,8 @@ export const setInitialState = () => (dispatch: any) => {
          item.price = data.price
          item.title = data.title
           return item
-        })
+       })
+    .catch(err => dispatch(setError(err)))
     
     // Get Products data per WishList
     const getWishListProducts = (wishList: WishList) =>
