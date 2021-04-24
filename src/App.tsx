@@ -37,6 +37,10 @@ const App: React.FC = () => {
     (state: any) => state.status
   )
 
+  const total: number = useSelector(
+    (state: any) => state.total
+  )
+
   useEffect(() => {
     dispatch(setInitialState())
   }, [dispatch])
@@ -53,7 +57,7 @@ const App: React.FC = () => {
         : <div id="content-container">
         <ShoppingList />
         
-          <CenterMenu />
+          <CenterMenu total={total}/>
           
         <RightHalfWrapper>
           <h1> Wish List</h1>

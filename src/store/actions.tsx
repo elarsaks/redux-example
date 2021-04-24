@@ -33,6 +33,11 @@ export const setFavorite = () => ({
   type: 'set/favorite',  
 })
 
+export const setTotal = (total: number) => ({
+  type: 'set/total',
+  payload: total
+})
+
 
 export const setInitialState = () => (dispatch: any) => {
   dispatch(setStatus('loading'))

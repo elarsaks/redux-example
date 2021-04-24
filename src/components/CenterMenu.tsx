@@ -19,7 +19,7 @@ const CenterMenuWrapper = styled.div`
   border-left: 1px solid teal;
   border-right: 1px solid teal;
 
-  h1 {
+  h2 {
     text-align: center;
   }
 `
@@ -57,7 +57,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   active,
   callBack,
-  text
+  text,
 }) => {
   return <ButtonContainer
     active={active}
@@ -67,7 +67,11 @@ const Button: React.FC<ButtonProps> = ({
     </ButtonContainer>;
 }
 
-export const CenterMenu: React.FC = () => {
+interface CenterMenuProps {
+  total: number
+}
+
+export const CenterMenu: React.FC<CenterMenuProps> = ({total}) => {
   const dispatch: any = useDispatch()
   const [activeButton, setActiveButton] = useState('custom')
   
@@ -75,7 +79,7 @@ export const CenterMenu: React.FC = () => {
     <CenterMenuWrapper >
       <Button
         active={activeButton === 'custom'}
-        text={'Hand pick products'}
+        text={'custom option'}
         callBack={() => {
           setActiveButton('custom')
           dispatch(setCustomSelection(true))
@@ -83,7 +87,7 @@ export const CenterMenu: React.FC = () => {
       
       <Button
         active={activeButton === 'cheapest'}
-        text={'Get cheapest option'}
+        text={'cheapest option'}
         callBack={() => {
           setActiveButton('cheapest')
           dispatch(setCheapest())
@@ -91,17 +95,17 @@ export const CenterMenu: React.FC = () => {
       
       <Button
         active={activeButton === 'favorite'}
-        text={'Get favorite option'}
+        text={'favorite option'}
         callBack={() => {
           setActiveButton('favorite')
           dispatch(setFavorite())
         }} />
       
-      <h1>Total: 9999€</h1>
+      <h2>Total: { total }€</h2>
 
       <Button
         active={activeButton === 'confirm'}
-        text={'Confirm Shopping List'}
+        text={'Confirm List'}
         callBack={() => {
           setActiveButton('confirm')
           console.log('CREATE CONFIRMATION!')
@@ -109,7 +113,7 @@ export const CenterMenu: React.FC = () => {
       
       <Button
         active={activeButton === 'empty'}
-        text={'Empty Shopping List'}
+        text={'Empty List'}
         callBack={() => {
           setActiveButton('empty')
           dispatch(emptyShoppingList())

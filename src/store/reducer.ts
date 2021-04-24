@@ -1,3 +1,4 @@
+import Product from '../components/Product'
 import wishLists from './initialState.json'
 
 const initialState: any = {
@@ -110,11 +111,9 @@ export default function reducer(state = initialState, action: any) {
     }
       
     case 'set/total': {
-      // TODO: calculate total + setTotal action
       return {
         ...state,
-        customSelection: false,
-        shoppingList: 0 //loopOverLists(state.shoppingList, setFavorite)
+        total: action.payload.toFixed(2)
       }
     }
       
