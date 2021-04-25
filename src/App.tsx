@@ -98,7 +98,7 @@ const App: React.FC = () => {
 
           /* Content */
           : <div id="content-container">
-            <ShoppingList />
+            <ShoppingList width={'49%'} />
 
             <CenterMenu customSelection={customSelection} total={total} />
 
@@ -108,6 +108,7 @@ const App: React.FC = () => {
                 <WishList
                   key={wishList.name}
                   activeHeader={hasSelectedItem(wishList.items).length > 0}
+                  width={'100%'}
                   wishList={wishList}
                 />
               ))}

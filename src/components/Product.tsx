@@ -8,7 +8,7 @@ interface ProductDivWrapperProps {
 }
 
 const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
-  cursor: ${(p) => (p.customSelection && p.amount === 0) ? 'pointer' : 'auto'};
+  cursor: ${(p) => (p.customSelection) ? 'pointer' : 'auto'};
   .open {
     visibility: visible;
     height: ${(p) => p.value > 63 ? '100px' : '75px'}; 
@@ -35,7 +35,7 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
   }
 
   .title:hover{
-    background-color: #51c8f7;
+    background-color: ${(p) => p.customSelection ? '#51c8f7' : ''};
   }
 
   .lower-half{
@@ -73,8 +73,9 @@ interface ProductProps {
   favorite: number
   open: boolean
   price: number
-  title: string
   sendItemToShoppingList: any
+  title: string
+  width: string
 }
 
 const Product: React.FC<ProductProps> = ({
@@ -83,8 +84,9 @@ const Product: React.FC<ProductProps> = ({
   favorite,
   open,
   price,
+  sendItemToShoppingList,
   title,
-  sendItemToShoppingList
+  width
 }) => {
 
   const getDiscount = (price: number, amount: number) => {
@@ -96,14 +98,13 @@ const Product: React.FC<ProductProps> = ({
       return price * amount
     }
   }
-
   return (
     <ProductDivWrapper
       amount={amount}
-      value={title.length}
       confirmed={confirmed}
-      customSelection={true}
+      customSelection={!(sendItemToShoppingList === null) && width === '100%'}
       onClick={sendItemToShoppingList}
+      value={title.length}
     >
       <div className={open ? 'open' : 'closed'}>
         <div className="title" >

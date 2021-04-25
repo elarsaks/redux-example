@@ -1,5 +1,6 @@
 const initialState: any = {
   customSelection: true,
+  fullPrice: 0,
   error: null,
   shoppingList: [],
   status: 'loading',
@@ -17,6 +18,13 @@ const loopOverLists = (wishLists: ProductList[], loopOverItems: any) =>
 
 export default function reducer(state = initialState, action: any) {
   switch (action.type) {
+
+    case 'set/fullPrice': {
+      return {
+        ...state,
+        fullPrice: action.payload.toFixed(2)
+      }
+    }
 
     case 'set/shoppingList': {
       return {
@@ -122,6 +130,7 @@ export default function reducer(state = initialState, action: any) {
         total: action.payload.toFixed(2)
       }
     }
+      
       
     default:
       return state

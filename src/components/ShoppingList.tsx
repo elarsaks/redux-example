@@ -2,17 +2,29 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from "react-redux"
 import Product from "./Product"
-import { setTotal } from "../store/actions"
+import { setTotal, setFullPrice } from "../store/actions"
 
-const LeftHalfWrapper = styled.div`
+interface LeftHalfWrapperProps {
+  width: string
+}
+
+const LeftHalfWrapper = styled.div<LeftHalfWrapperProps>`
+  width: ${(p) => p.width};
+  padding: 0.3em;
+  overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
   ::-webkit-scrollbar { 
     width: 0;
     height: 0;
-  } 
+  }
 `
-export const ShoppingList: React.FC = () => {
+
+interface ShoppingListProps {
+  width: string
+}
+
+export const ShoppingList: React.FC<ShoppingListProps> = ({ width }) => {
 
   const initialList: ProductList[] = useSelector(
     (state: any) => state.shoppingList
@@ -50,20 +62,30 @@ export const ShoppingList: React.FC = () => {
     return mapProductsDataBackToIds(confirmedProducts, productsWithAmounts)
   }
 
+  const getDiscountPercentage = (price: number, amount: number) => {
+    if (amount > 1 && amount < 9) {
+      return price * amount - (price * amount / 10)
+    } else if (amount > 9) {
+      return price * amount - (price * 9 / 10)
+    } else {
+      return price * amount
+    }
+  }
+
   // Get Shopping list total price
   const totalPrice = () => {
     const productList = shoppingList()
-    const getDiscount = (price: number, amount: number) => {
-      if (amount > 1 && amount < 9) {
-        return price * amount - (price * amount / 10)
-      } else if (amount > 9) {
-        return price * amount - (price * 9 / 10)
-      } else {
-        return price * amount
-      }
-    }
-    const priceList = productList.map((list: Product[]) => getDiscount(list[0].price, list.length))
-    return priceList.length === 0 ? 0 : priceList.reduce((acc: number, curr: number) => acc + curr)
+    const DiscountedPriceList = productList.map((list: Product[]) => getDiscountPercentage(list[0].price, list.length))
+
+    const priceList = productList.map((list: Product[]) => list[0].price * list.length)
+    const fullPrice = priceList.reduce((acc: number, curr: number) => acc + curr)
+    const discountedPrice = DiscountedPriceList.reduce((acc: number, curr: number) => acc + curr)
+
+    dispatch(setFullPrice(fullPrice))
+
+    return DiscountedPriceList.length === 0
+      ? 0
+      : discountedPrice
   }
 
   // Get average amount of stars incase there same product from different child
@@ -82,7 +104,7 @@ export const ShoppingList: React.FC = () => {
   }, [dispatch, productList, total])
 
   return (
-    <LeftHalfWrapper className="half">
+    <LeftHalfWrapper width={width}>
       <h1>Shopping List</h1>
       {productList.map((product: Product[], i: number) => (
         <Product
@@ -93,7 +115,9 @@ export const ShoppingList: React.FC = () => {
           price={product[0].price}
           title={product[0].title}
           favorite={getFavoriteAverage(product)}
-          sendItemToShoppingList={null} />
+          sendItemToShoppingList={null}
+          width={'99%'}
+        />
       ))}
 
     </LeftHalfWrapper>

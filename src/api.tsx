@@ -12,8 +12,21 @@ const getProductsData = (productId: Number) => {
     .then(resp => resp.data)
 }
 
+const saveProductData = (productId: Number) => {
+  return axios({
+    method: 'PUT',
+    url: `https://fakestoreapi.com/products/${productId}`,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  })
+    .then(resp => resp.data)
+}
+
+
 const api = {
-  getProductsData
+  getProductsData,
+  saveProductData
 }
 
 export default api

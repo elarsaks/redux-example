@@ -12,6 +12,11 @@ export const setError = (error: WishList[]) => ({
   payload: error
 })
 
+export const setFullPrice = (fullPrice: number) => ({
+  type: 'set/fullPrice',
+  payload: fullPrice
+})
+
 export const setCustomSelection = (customSelection: boolean) => ({
   type: 'set/customSelection',
   payload: customSelection
