@@ -78,8 +78,12 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ width }) => {
     const DiscountedPriceList = productList.map((list: Product[]) => getDiscountPercentage(list[0].price, list.length))
 
     const priceList = productList.map((list: Product[]) => list[0].price * list.length)
-    const fullPrice = priceList.reduce((acc: number, curr: number) => acc + curr)
-    const discountedPrice = DiscountedPriceList.reduce((acc: number, curr: number) => acc + curr)
+    const fullPrice = priceList.length > 0
+      ? priceList.reduce((acc: number, curr: number) => acc + curr)
+      : 0
+    const discountedPrice = DiscountedPriceList.length > 0
+      ? DiscountedPriceList.reduce((acc: number, curr: number) => acc + curr)
+      : 0
 
     dispatch(setFullPrice(fullPrice))
 

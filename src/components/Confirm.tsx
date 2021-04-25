@@ -142,9 +142,9 @@ const Confirm: React.FC<confirmProps> = ({
             ? <div >
               <ShoppingList width={'99%'} />
               <FinalPrice >
-                Total Price: <b>{price}€   </b>
-              Total Discount: <b>{(fullPrice - finalPrice).toFixed(2)}€   </b>
-              Final Price: <b>{finalPrice}€</b>
+                Total Price: <b>{fullPrice}€   </b>
+                Total Discount: <b>{(fullPrice - finalPrice).toFixed(2)}€   </b>
+                Final Price: <b>{finalPrice}€</b>
               </FinalPrice>
             </ div>
 
