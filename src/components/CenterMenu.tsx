@@ -19,8 +19,17 @@ const CenterMenuWrapper = styled.div`
   border-left: 1px solid teal;
   border-right: 1px solid teal;
 
-  h2 {
-    text-align: center;
+  .container {
+    display: flex;
+    height: 3em;
+    text-align:center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1em 2px 1em 2px;
+
+    h2 {
+      text-align: center;
+    }
   }
 `
 
@@ -44,8 +53,8 @@ const ButtonContainer = styled.div<ButtonContainerProps>`
   padding: 1em;
 
   :hover{
-      background-color: #13c4d1;
-    }
+    background-color: #13c4d1;
+  }
 `
 
 interface ButtonProps {
@@ -111,7 +120,9 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({
           dispatch(setFavorite())
         }} />
 
-      <h2>Total: {total}€</h2>
+      <div className="container">
+        <h2>Total: {total}€</h2>
+      </div>
 
       <Button
         active={activeButton === 'confirm'}
@@ -128,6 +139,7 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({
           setActiveButton('empty')
           dispatch(emptyShoppingList())
         }} />
+
     </CenterMenuWrapper>
   )
 }

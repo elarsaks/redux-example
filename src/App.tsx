@@ -68,6 +68,9 @@ const App: React.FC = () => {
     (state: any) => state.total
   )
 
+  const hasSelectedItem = (items: Product[]) =>
+    items.filter(item => item.confirmed === true)
+
   useEffect(() => {
     dispatch(setInitialState())
   }, [dispatch])
@@ -87,6 +90,7 @@ const App: React.FC = () => {
         /* Error */
         : error != null
           ? <ErrorDiv>
+            {/* TODO: Find out why this h1 styling doesnt work in Styled component */}
             <h1 style={{ "color": '#a32424' }}>
               Oops something went wrong, please contact system administrator!
               </h1>
@@ -95,8 +99,19 @@ const App: React.FC = () => {
           /* Content */
           : <div id="content-container">
             <ShoppingList />
+
             <CenterMenu customSelection={customSelection} total={total} />
-            <WishList activeHeader={true} shoppingList={shoppingList} />
+
+            <div className="half">
+              <h1> Wish List</h1>
+              {shoppingList.map((wishList: ProductList) => (
+                <WishList
+                  key={wishList.name}
+                  activeHeader={hasSelectedItem(wishList.items).length > 0}
+                  wishList={wishList}
+                />
+              ))}
+            </div>
           </div>
       }
     </main>

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components'
-import { useSelector } from "react-redux"
 interface ProductDivWrapperProps {
   amount: number
   confirmed: boolean
@@ -33,6 +32,10 @@ const ProductDivWrapper = styled.div<ProductDivWrapperProps>`
     background-color: ${(p) => p.confirmed ? '#51c8f7' : '#068dc2'}; 
     padding: 0.5em;
     border-radius: 0.3em 0.3em 0 0;
+  }
+
+  .title:hover{
+    background-color: #51c8f7;
   }
 
   .lower-half{
@@ -83,10 +86,6 @@ const Product: React.FC<ProductProps> = ({
   title,
   sendItemToShoppingList
 }) => {
-
-  const customSelection: boolean = useSelector(
-    (state: any) => state.customSelection
-  )
 
   const getDiscount = (price: number, amount: number) => {
     if (amount > 1 && amount < 9) {
