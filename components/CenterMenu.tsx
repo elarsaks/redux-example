@@ -6,8 +6,8 @@ import {
   setCheapest,
   setFavorite,
   setCustomSelection
-} from '../store/actions'
-import Confirm from './Confirm'
+} from '../redux/actions'
+//import Confirm from './Confirm'
 
 
 const CenterMenuWrapper = styled.div`
@@ -88,7 +88,7 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({
 }) => {
   const dispatch: any = useDispatch()
   const [activeButton, setActiveButton] = useState('custom')
-  const [confirmDialog, setConfirmDialog] = useState(false)
+  //const [confirmDialog, setConfirmDialog] = useState(false)
 
   useEffect(() => {
     if (customSelection) {
@@ -122,21 +122,16 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({
           dispatch(setFavorite())
         }} />
 
-      {confirmDialog
-        ? <Confirm
-          cancel={() => setConfirmDialog(false)}
-          finalPrice={total}
-        />
-        : <div className="container">
-          <h2>Total: {total}€</h2>
-        </div>}
+      <div className="container">
+        <h2>Total: {total}€</h2>
+      </div>
 
       <Button
         active={activeButton === 'confirm'}
         text={'Confirm List'}
         callBack={() => {
           setActiveButton('confirm')
-          setConfirmDialog(true)
+          //  setConfirmDialog(true)
         }} />
 
       <Button

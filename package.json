@@ -1,56 +1,34 @@
 {
-  "name": "droppe-xmas",
-  "version": "0.1.0",
-  "private": true,
+  "name": "Droppe-Xmas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react-dom": "^17.0.0",
-    "@types/styled-components": "5.1.7",
+    "@types/styled-components": "^5.1.9",
     "axios": "^0.21.1",
-    "node-sass": "^5.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.3",
-    "react-scripts": "4.0.3",
+    "next": "^9.1.7",
+    "next-redux-wrapper": "^6.0.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.4",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.3",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "sass": "^1.32.12",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.3",
-    "@types/react-redux": "^7.1.16",
-    "@types/redux": "^3.6.0",
-    "@types/redux-thunk": "^2.1.0"
+    "@types/node": "^15.0.2",
+    "@types/react": "^17.0.5",
+    "babel-plugin-styled-components": "^1.12.0",
+    "typescript": "^4.2.4"
   }
 }

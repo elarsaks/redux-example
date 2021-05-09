@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import { useSelector, useDispatch } from "react-redux"
 import Product from "./Product"
-import { setTotal, setFullPrice } from "../store/actions"
+import { setTotal, setFullPrice } from "../redux/actions"
+import WishList from './WishList';
 
 interface LeftHalfWrapperProps {
   width: string
@@ -22,13 +23,17 @@ const LeftHalfWrapper = styled.div<LeftHalfWrapperProps>`
 
 interface ShoppingListProps {
   width: string
+  initialList
 }
 
-export const ShoppingList: React.FC<ShoppingListProps> = ({ width }) => {
-
+export const ShoppingList: React.FC<ShoppingListProps> = ({ width, initialList }) => {
+  /*
   const initialList: ProductList[] = useSelector(
     (state: any) => state.shoppingList
-  )
+  ) */
+
+  console.log(initialList)
+  //const initialList = [] // wishListState.shoppingList
 
   const getAllProducts = (wishLists: ProductList[]) => {
     let productList: Product[] = []
@@ -85,7 +90,7 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ width }) => {
       ? DiscountedPriceList.reduce((acc: number, curr: number) => acc + curr)
       : 0
 
-    dispatch(setFullPrice(fullPrice))
+    //dispatch(setFullPrice(fullPrice))
 
     return DiscountedPriceList.length === 0
       ? 0
@@ -100,13 +105,13 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ width }) => {
   }
 
   const productList = shoppingList()
-  const dispatch: any = useDispatch()
+  //const dispatch: any = useDispatch()
   const total = totalPrice()
-
-  useEffect(() => {
-    dispatch(setTotal(total))
-  }, [dispatch, productList, total])
-
+  /*
+    useEffect(() => {
+      dispatch(setTotal(total))
+    }, [dispatch, productList, total])
+  */
   return (
     <LeftHalfWrapper width={width}>
       <h1>Shopping List</h1>

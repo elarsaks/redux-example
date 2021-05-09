@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
 import { useSelector } from "react-redux"
-import { ShoppingList } from "./ShoppingList"
-import WishList from './WishList'
+import { ShoppingList } from "../components/ShoppingList"
+import WishList from '../components/WishList'
 import api from '../api'
+import { connect } from 'react-redux'
 
 const ConfirmDiv = styled.div`
   position: absolute;
@@ -84,15 +85,17 @@ const Button = styled.button`
 interface confirmProps {
   cancel: any
   finalPrice: number
+  wishListState: any
 }
 
 const Confirm: React.FC<confirmProps> = ({
   cancel,
-  finalPrice
+  finalPrice,
+  wishListState
 }) => {
 
   const shoppingList: ProductList[] = useSelector(
-    (state: any) => state.shoppingList
+    (state: any) => wishListState.shoppingList
   )
 
   const fullPrice: number = useSelector(
@@ -115,9 +118,11 @@ const Confirm: React.FC<confirmProps> = ({
     }
   }
 
-  const saveProductsToApi = () => Promise.all(shoppingList.map((wishList: WishList) =>
-    Promise.all(wishList.items.map(product => api.saveProductData(product.productId)))))
-    .then(() => cancel())
+  const saveProductsToApi = () =>
+    Promise.all(shoppingList.map((wishList: WishList) =>
+      Promise.all(wishList.items.map(product =>
+        api.saveProductData(product.productId)))))
+      .then(() => cancel())
 
 
 
@@ -178,4 +183,4 @@ const Confirm: React.FC<confirmProps> = ({
   )
 }
 
-export default Confirm
+export default connect((state) => state)(Confirm)

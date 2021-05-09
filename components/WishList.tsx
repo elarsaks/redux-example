@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Product from './Product'
 import { useDispatch } from "react-redux"
-import { setSingleProduct } from '../store/actions'
+import { setSingleProduct } from "../redux/actions"
 
 interface WishListWrapperProps {
   activeHeader: boolean

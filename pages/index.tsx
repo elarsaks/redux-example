@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import "./App.scss"
 import styled, { keyframes } from 'styled-components'
 import { useSelector, useDispatch } from "react-redux"
-import { CenterMenu } from "./components/CenterMenu"
-import { ShoppingList } from "./components/ShoppingList"
-import WishList from './components/WishList'
-import { setInitialState } from "./store/actions"
+import { CenterMenu } from "../components/CenterMenu"
+import { ShoppingList } from "../components/ShoppingList"
+import WishList from '../components/WishList'
+import { setInitialState } from "../redux/actions"
+import { wrapper } from '../redux/store';
+import { connect } from 'react-redux'
 
 const rotate360 = keyframes`
   from {
@@ -45,12 +46,14 @@ const ErrorDiv = styled.div`
 	text-align: center;
 `
 
-const App: React.FC = () => {
+interface AppProps {
+  wishListState: any
+}
+
+const App: React.FC<AppProps> = ({ wishListState }) => {
   const dispatch: any = useDispatch()
 
-  const shoppingList: ProductList[] = useSelector(
-    (state: any) => state.shoppingList
-  )
+  const shoppingList = wishListState.shoppingList
 
   const customSelection: boolean = useSelector(
     (state: any) => state.customSelection
@@ -98,7 +101,7 @@ const App: React.FC = () => {
 
           /* Content */
           : <div id="content-container">
-            <ShoppingList width={'49%'} />
+            <ShoppingList initialList={shoppingList} width={'49%'} />
 
             <CenterMenu customSelection={customSelection} total={total} />
 
@@ -119,4 +122,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default connect((state) => state)(App)
