@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
-import { useSelector } from "react-redux"
 import { ShoppingList } from "../components/ShoppingList"
 import WishList from '../components/WishList'
 import api from '../api'
 import { connect } from 'react-redux'
+import Router from 'next/router'
 
 const ConfirmDiv = styled.div`
   position: absolute;
@@ -83,24 +83,17 @@ const Button = styled.button`
   min-width: 4em;
 `
 interface confirmProps {
-  cancel: any
   finalPrice: number
   wishListState: any
 }
 
 const Confirm: React.FC<confirmProps> = ({
-  cancel,
   finalPrice,
   wishListState
 }) => {
 
-  const shoppingList: ProductList[] = useSelector(
-    (state: any) => wishListState.shoppingList
-  )
-
-  const fullPrice: number = useSelector(
-    (state: any) => state.fullPrice
-  )
+  const shoppingList: ProductList[] = wishListState.shoppingList
+  const fullPrice: number = wishListState.fullPrice
 
   const [confirmed, setConfirmed] = useState('wishList')
 
@@ -122,7 +115,7 @@ const Confirm: React.FC<confirmProps> = ({
     Promise.all(shoppingList.map((wishList: WishList) =>
       Promise.all(wishList.items.map(product =>
         api.saveProductData(product.productId)))))
-      .then(() => cancel())
+      .then(() => Router.push('/'))
 
 
 
@@ -145,7 +138,7 @@ const Confirm: React.FC<confirmProps> = ({
 
           : confirmed === 'shoppingList'
             ? <div >
-              <ShoppingList width={'99%'} />
+              <ShoppingList initialList={shoppingList} width={'99%'} />
               <FinalPrice >
                 Total Price: <b>{fullPrice}€   </b>
                 Total Discount: <b>{(fullPrice - finalPrice).toFixed(2)}€   </b>
@@ -162,7 +155,7 @@ const Confirm: React.FC<confirmProps> = ({
           ? <div className="confirm-actions">
             <Button
               className="cancel-btn"
-              onClick={() => cancel()}
+              onClick={() => Router.push('/')}
             >
               Cancel
             </Button>

@@ -1,14 +1,13 @@
 import styled from 'styled-components'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from "react-redux"
+import Router from 'next/router'
 import {
   emptyShoppingList,
   setCheapest,
   setFavorite,
   setCustomSelection
 } from '../redux/actions'
-//import Confirm from './Confirm'
-
 
 const CenterMenuWrapper = styled.div`
   display: flex;
@@ -88,7 +87,6 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({
 }) => {
   const dispatch: any = useDispatch()
   const [activeButton, setActiveButton] = useState('custom')
-  //const [confirmDialog, setConfirmDialog] = useState(false)
 
   useEffect(() => {
     if (customSelection) {
@@ -131,6 +129,7 @@ export const CenterMenu: React.FC<CenterMenuProps> = ({
         text={'Confirm List'}
         callBack={() => {
           setActiveButton('confirm')
+          Router.push('/confirm')
           //  setConfirmDialog(true)
         }} />
 
