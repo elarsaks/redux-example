@@ -62,7 +62,7 @@ const ConfirmDiv = styled.div`
   }
 `
 
-const FinalPrice = styled.div`
+const Total = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 1em;
@@ -83,17 +83,16 @@ const Button = styled.button`
   min-width: 4em;
 `
 interface confirmProps {
-  finalPrice: number
   wishListState: any
 }
 
 const Confirm: React.FC<confirmProps> = ({
-  finalPrice,
   wishListState
 }) => {
 
   const shoppingList: ProductList[] = wishListState.shoppingList
   const fullPrice: number = wishListState.fullPrice
+  const total = wishListState.total
 
   const [confirmed, setConfirmed] = useState('wishList')
 
@@ -117,9 +116,6 @@ const Confirm: React.FC<confirmProps> = ({
         api.saveProductData(product.productId)))))
       .then(() => Router.push('/'))
 
-
-
-  const price = 1
   return (
     <ConfirmDiv>
       <div className="content">
@@ -139,11 +135,11 @@ const Confirm: React.FC<confirmProps> = ({
           : confirmed === 'shoppingList'
             ? <div >
               <ShoppingList initialList={shoppingList} width={'99%'} />
-              <FinalPrice >
+              <Total >
                 Total Price: <b>{fullPrice}€   </b>
-                Total Discount: <b>{(fullPrice - finalPrice).toFixed(2)}€   </b>
-                Final Price: <b>{finalPrice}€</b>
-              </FinalPrice>
+                Total Discount: <b>{(fullPrice - total).toFixed(2)}€   </b>
+                Final Price: <b>{total}€</b>
+              </Total>
             </ div>
 
             : <div>
