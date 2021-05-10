@@ -66,10 +66,6 @@ const App: React.FC<AppProps> = ({ wishListState }) => {
 
   return (
     <main>
-      <div id="header">
-        <h1> Droppe X-mas </h1>
-      </div>
-
       {status === 'loading' && error === null
         /* Loading */
         ? <LoadingDiv>
