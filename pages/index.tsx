@@ -87,7 +87,7 @@ const App: React.FC<AppProps> = ({ wishListState }) => {
 
           /* Content */
           : <div id="content-container">
-            <ShoppingList initialList={shoppingList} width={'49%'} />
+            <ShoppingList initialList={shoppingList} width={'45%'} />
 
             <CenterMenu customSelection={customSelection} total={total} />
 
