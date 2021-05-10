@@ -27,7 +27,6 @@ const WishListWrapper = styled.div<WishListWrapperProps>`
     text-transform: uppercase;
 
     :hover{
-     // background-color: #13c4d1;
       background-color: ${p => p.width === '100%' ? '#13c4d1' : ''};
     }
   }

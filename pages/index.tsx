@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components'
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { CenterMenu } from "../components/CenterMenu"
 import { ShoppingList } from "../components/ShoppingList"
 import WishList from '../components/WishList'
 import { setInitialState } from "../redux/actions"
-import { wrapper } from '../redux/store';
 import { connect } from 'react-redux'
 
 const rotate360 = keyframes`
@@ -51,25 +50,12 @@ interface AppProps {
 }
 
 const App: React.FC<AppProps> = ({ wishListState }) => {
-  const dispatch: any = useDispatch()
-
+  const customSelection: boolean = wishListState.customSelection
+  const error: string = wishListState.error
   const shoppingList = wishListState.shoppingList
-
-  const customSelection: boolean = useSelector(
-    (state: any) => state.customSelection
-  )
-
-  const error: string = useSelector(
-    (state: any) => state.error
-  )
-
-  const status: string = useSelector(
-    (state: any) => state.status
-  )
-
-  const total: number = useSelector(
-    (state: any) => state.total
-  )
+  const status: string = wishListState.status
+  const total: number = wishListState.total
+  const dispatch: any = useDispatch()
 
   const hasSelectedItem = (items: Product[]) =>
     items.filter(item => item.confirmed === true)
