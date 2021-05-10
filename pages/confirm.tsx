@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { ShoppingList } from "../components/ShoppingList"
 import WishList from '../components/WishList'
 import api from '../api'
 import { connect } from 'react-redux'
 import Router from 'next/router'
+import { setInitialState } from "../redux/actions"
+import { useDispatch } from "react-redux"
 
 const ConfirmDiv = styled.div`
   position: absolute;
@@ -93,6 +95,7 @@ const Confirm: React.FC<confirmProps> = ({
   const shoppingList: ProductList[] = wishListState.shoppingList
   const fullPrice: number = wishListState.fullPrice
   const total = wishListState.total
+  const dispatch: any = useDispatch()
 
   const [confirmed, setConfirmed] = useState('wishList')
 
@@ -115,6 +118,10 @@ const Confirm: React.FC<confirmProps> = ({
       Promise.all(wishList.items.map(product =>
         api.saveProductData(product.productId)))))
       .then(() => Router.push('/'))
+
+  useEffect(() => {
+    dispatch(setInitialState())
+  }, [dispatch])
 
   return (
     <ConfirmDiv>
