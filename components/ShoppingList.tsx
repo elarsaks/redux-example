@@ -110,8 +110,8 @@ export const ShoppingList: React.FC<ShoppingListProps> = ({ width, initialList }
   }, [fullPrice(), discountedPrice()])
 
   return (
-    <LeftHalfWrapper width={width}>
-      <h1>Shopping List</h1>
+    <LeftHalfWrapper width={width} className="half">
+      <h1 className="half-header">Shopping List</h1>
       {productList.map((product: Product[], i: number) => (
         <Product
           key={i}
