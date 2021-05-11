@@ -27,39 +27,37 @@ interface ShoppingListProps {
 
 export const ShoppingList: React.FC<ShoppingListProps> = ({ width, initialList }) => {
 
-  const getAllProducts = (wishLists: ProductList[]) => {
-    let productList: Product[] = []
-    wishLists.forEach((i: ProductList) => productList.push(...i.items))
-    return productList
-  }
-
-  const countSameProducts = (productList: Product[], productId: number) =>
-    productList.filter((p) => p.productId === productId).length;
-
-  const mapProductsDataBackToIds = (confirmedProducts: Product[], productsWithAmounts: any) => {
-    return productsWithAmounts.map((p: any) =>
-      confirmedProducts.filter((cp: Product) => cp.productId === p.productId))
-  }
-
   // Create shoppingList with repeating products merged into single item
   const shoppingList = () => {
-    const productList = getAllProducts(initialList)
-    const confirmedProducts = productList.filter(product => product.confirmed)
-    const uniqueProducts = confirmedProducts.map(item => item.productId)
+
+    // Get list of all confirmed products
+    const getAllProducts = (wishLists: ProductList[]) =>
+      wishLists.map((i: ProductList) =>
+        i.items.filter(product => product.confirmed))
+        .flat()
+
+    const mapProductsDataBackToIds = (confirmedProducts: Product[], productsWithAmounts: any) => {
+      return productsWithAmounts.map((p: any) =>
+        confirmedProducts.filter((cp: Product) => cp.productId === p.productId))
+    }
+
+    const uniqueProducts = getAllProducts(initialList).map(item => item.productId)
       .filter((value: number, index: number, self: number[]) => self.indexOf(value) === index)
 
     // Count repeating products
     const productsWithAmounts = uniqueProducts.map(p => {
       return {
         productId: p,
-        amount: countSameProducts(confirmedProducts, p)
+        amount: getAllProducts(initialList)
+          .filter(product => product.productId == p)
+          .length
       }
     })
 
-    return mapProductsDataBackToIds(confirmedProducts, productsWithAmounts)
+    return mapProductsDataBackToIds(getAllProducts(initialList), productsWithAmounts)
   }
 
-  // Get average amount of stars incase there same product from different child
+  // Get average amount of stars incase there are same products from different child
   const getFavoriteAverage = (productList: Product[]) => {
     const favorites = productList.map(p => p.favorite)
     const sum = favorites.reduce((a, c) => a + c)
