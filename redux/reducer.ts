@@ -7,7 +7,6 @@ const loopOverLists = (wishLists: ProductList[], loopOverItems: any) =>
         }
     })
 
-
 const initialState: any = {
     customSelection: true,
     fullPrice: 0,

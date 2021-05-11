@@ -46,34 +46,29 @@ const ErrorDiv = styled.div`
 `
 
 interface AppProps {
-  wishListState: any
+  state: any
 }
 
-const App: React.FC<AppProps> = ({ wishListState }) => {
-  const customSelection: boolean = wishListState.customSelection
-  const error: string = wishListState.error
-  const shoppingList = wishListState.shoppingList
-  const status: string = wishListState.status
-  const total: number = wishListState.total
+const App: React.FC<AppProps> = ({ state }) => {
   const dispatch: any = useDispatch()
-
-  const hasSelectedItem = (items: Product[]) =>
-    items.filter(item => item.confirmed === true)
 
   useEffect(() => {
     dispatch(setInitialState())
   }, [dispatch])
 
+  const hasSelectedItem = (items: Product[]) =>
+    items.filter(item => item.confirmed === true)
+
   return (
     <main>
-      {status === 'loading' && error === null
+      {state.status === 'loading' && state.error === null
         /* Loading */
         ? <LoadingDiv>
           <div className="spinner" />
         </LoadingDiv>
 
         /* Error */
-        : error != null
+        : state.error != null
           ? <ErrorDiv>
             {/* TODO: Find out why this h1 styling doesnt work in Styled component */}
             <h1 style={{ "color": '#a32424' }}>
@@ -83,13 +78,13 @@ const App: React.FC<AppProps> = ({ wishListState }) => {
 
           /* Content */
           : <div id="content-container">
-            <ShoppingList initialList={shoppingList} width={'45%'} />
+            <ShoppingList initialList={state.shoppingList} width={'45%'} />
 
-            <CenterMenu customSelection={customSelection} total={total} />
+            <CenterMenu customSelection={state.customSelection} total={state.total} />
 
             <div className="half">
               <h1> Wish List</h1>
-              {shoppingList.map((wishList: ProductList) => (
+              {state.shoppingList.map((wishList: ProductList) => (
                 <WishList
                   key={wishList.name}
                   activeHeader={hasSelectedItem(wishList.items).length > 0}

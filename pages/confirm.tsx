@@ -85,16 +85,16 @@ const Button = styled.button`
   min-width: 4em;
 `
 interface confirmProps {
-  wishListState: any
+  state: any
 }
 
 const Confirm: React.FC<confirmProps> = ({
-  wishListState
+  state
 }) => {
 
-  const shoppingList: ProductList[] = wishListState.shoppingList
-  const fullPrice: number = wishListState.fullPrice
-  const total = wishListState.total
+  const shoppingList: ProductList[] = state.shoppingList
+  const fullPrice: number = state.fullPrice
+  const total = state.total
   const dispatch: any = useDispatch()
 
   const [confirmed, setConfirmed] = useState('wishList')
