@@ -46,7 +46,12 @@ const ErrorDiv = styled.div`
 `
 
 interface AppProps {
-  state: any
+  state: {
+    customSelection: boolean
+    error: string
+    status: string
+    total: number
+  }
 }
 
 const App: React.FC<AppProps> = ({ state }) => {
