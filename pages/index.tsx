@@ -51,6 +51,7 @@ interface AppProps {
     error: string
     status: string
     total: number
+    shoppingList: [any]
   }
 }
 
