@@ -1,27 +1,5 @@
 /// <reference types="next" />
-/// <reference types="next/types/global" />
+/// <reference types="next/image-types/global" />
 
-
-type WishList = {
-  name: string
-  items: WishListItem[]
-}
-
-type ProductList = {
-  name: string
-  items: Product[]
-}
-
-type Product = {
-  productId: number
-  favorite: number
-  confirmed: boolean
-  title: string
-  price: number
-}
-
-type WishListItem = {
-  productId: number
-  favorite: number
-  confirmed: boolean
-}
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
