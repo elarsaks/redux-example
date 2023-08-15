@@ -1,8 +1,8 @@
-# Droppe-Xmas
+# redux-example
 
 This is a simple shopping cart built at first with React & Redux and later converted into NextJS.
 
-## See it [Live](http://droppe-xmas.s3-website.eu-north-1.amazonaws.com/)
+## See it [Live](http://redux-example.s3-website.eu-north-1.amazonaws.com/)
 
 ## Setup and run it locally
 1. Download project from GitHub
@@ -11,4 +11,4 @@ This is a simple shopping cart built at first with React & Redux and later conve
 4. Test it on on http://localhost:3000
 
 ## Screenshot
-<img src="https://s3.eu-north-1.amazonaws.com/elar-saks.info/Droppe-Xmas.png" />
+<img src="https://s3.eu-north-1.amazonaws.com/elar-saks.info/redux-example.png" />
